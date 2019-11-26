@@ -41,7 +41,7 @@ def create_user():
     return response
 
 @bp.route('/users', methods=['GET'])
-@token_auth.login_required
+#@token_auth.login_required
 def get_users():
     '''返回用户集合，分页'''
     page = request.args.get('page', 1, type=int)
@@ -50,7 +50,7 @@ def get_users():
     return jsonify(data)
 
 @bp.route('/users/<int:id>', methods=['GET'])
-@token_auth.login_required
+#@token_auth.login_required
 def get_user(id):
     '''返回一个用户'''
     return jsonify(User.query.get_or_404(id).to_dict())
