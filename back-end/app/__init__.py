@@ -5,9 +5,9 @@ from flask_migrate import Migrate
 from config import Config
 
 
-# Flask-SQLAlchemy plugin
+# Flask-SQLAlchemy插件
 db = SQLAlchemy()
-# Flask-Migrate plugin
+# Flask-Migrate 插件
 migrate = Migrate()
 
 '''

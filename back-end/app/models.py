@@ -5,6 +5,7 @@ import base64
 from datetime import datetime, timedelta
 import os
 
+#用于分页
 class PaginatedAPIMixin(object):
     @staticmethod
     def to_collection_dict(query, page, per_page, endpoint, **kwargs):
@@ -37,6 +38,7 @@ class User(PaginatedAPIMixin,db.Model):
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
 
+    #在打印的时候更好看，不会愚蠢的输出类的信息
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
@@ -45,7 +47,9 @@ class User(PaginatedAPIMixin,db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-
+    '''
+    todict和fromdict主要用于前后端交互，它们之间传递的是JSON对象。
+    '''
     def to_dict(self, include_email=False):
         data = {
             'id': self.id,
@@ -54,6 +58,7 @@ class User(PaginatedAPIMixin,db.Model):
                 'self': url_for('api.get_user', id=self.id)
             }
         }
+        # 只有当用户请求自己的数据时才包含 email
         if include_email:
             data['email'] = self.email
         return data
