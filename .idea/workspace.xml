@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="23e918dd-8eb4-4c36-8f46-2a51be209d44" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Alert.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Alert.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Register.vue" afterDir="false" />
-    </list>
+    <list default="true" id="23e918dd-8eb4-4c36-8f46-2a51be209d44" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/front-end/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="260">
-              <caret line="52" column="52" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
+              <caret line="52" column="2" selection-start-line="52" selection-start-column="2" selection-end-line="52" selection-end-column="52" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -230,12 +223,12 @@
       <workItem from="1574733944353" duration="645000" />
       <workItem from="1574735051665" duration="22072000" />
       <workItem from="1574817503244" duration="5922000" />
-      <workItem from="1574846353555" duration="1845000" />
+      <workItem from="1574846353555" duration="2112000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32650000" />
+    <option name="totallyTimeSpent" value="32917000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -248,7 +241,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="977" y="0" width="995" height="789" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10565635" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -512,7 +504,7 @@
     <entry file="file://$PROJECT_DIR$/front-end/src/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
-          <caret line="52" column="52" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
+          <caret line="52" column="2" selection-start-line="52" selection-start-column="2" selection-end-line="52" selection-end-column="52" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
