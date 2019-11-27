@@ -88,7 +88,7 @@ export default {
       }
       axios.post(path, payload)
         .then((response) => {
-          // handle success
+          // 成功注册，跳转到login界面
           store.setNewAction()
           this.$router.push('/login')
         })
@@ -106,6 +106,7 @@ export default {
         })
     },
     validEmail: function (email) {
+      //看看是否为正确的email格式
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     }
