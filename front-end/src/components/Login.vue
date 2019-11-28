@@ -94,9 +94,10 @@
           return false
         }
         //通过 axios 连接前后端，能够调用后端API，以下实现了auth，获得token
-        const path = 'http://localhost:5000/api/tokens'
-         // axios 实现Basic Auth需要在config中设置 auth 这个属性即可
-        axios.post(path,{},{
+        //const path = 'http://localhost:5000/api/tokens'
+        const path = '/tokens'
+        // axios 实现Basic Auth需要在config中设置 auth 这个属性即可
+        this.$axios.post(path,{},{
           auth:{
             'username':this.loginForm.username,
             'password':this.loginForm.password
@@ -104,8 +105,10 @@
         }).then((response)=>{
           //handle success
           window.localStorage.setItem('token',response.data.token)
-          store.resetNotNewAction()
+          // store.resetNotNewAction()
           store.loginAction()
+          this.$toasted.success(`Welcome! ${name}!`, { icon: 'fingerprint' })
+          console.log("hi")
           if(typeof  this.$route.query.redirect == 'undefined'){
             this.$router.push('/')
           }else{

@@ -1,11 +1,13 @@
-from werkzeug.security import generate_password_hash, check_password_hash
-from app import db
-from flask import url_for
 import base64
-from datetime import datetime, timedelta
+import jwt
 import os
+from app import db
+from datetime import datetime, timedelta
+from flask import url_for, current_app
+from werkzeug.security import generate_password_hash, check_password_hash
 
-#用于分页
+
+# 用于分页
 class PaginatedAPIMixin(object):
     @staticmethod
     def to_collection_dict(query, page, per_page, endpoint, **kwargs):
@@ -30,15 +32,16 @@ class PaginatedAPIMixin(object):
         return data
 
 
-class User(PaginatedAPIMixin,db.Model):
+class User(PaginatedAPIMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))  # 不保存原始密码
-    token = db.Column(db.String(32), index=True, unique=True)
-    token_expiration = db.Column(db.DateTime)
 
-    #在打印的时候更好看，不会愚蠢的输出类的信息
+    # token = db.Column(db.String(32), index=True, unique=True)
+    # token_expiration = db.Column(db.DateTime)
+
+    # 在打印的时候更好看，不会愚蠢的输出类的信息
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
@@ -47,9 +50,11 @@ class User(PaginatedAPIMixin,db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
     '''
     todict和fromdict主要用于前后端交互，它们之间传递的是JSON对象。
     '''
+
     def to_dict(self, include_email=False):
         data = {
             'id': self.id,
@@ -70,7 +75,7 @@ class User(PaginatedAPIMixin,db.Model):
         if new_user and 'password' in data:
             self.set_password(data['password'])
 
-
+    '''
     def get_token(self, expires_in=3600):
         now = datetime.utcnow()
         if self.token and self.token_expiration > now + timedelta(seconds=60):
@@ -82,10 +87,47 @@ class User(PaginatedAPIMixin,db.Model):
 
     def revoke_token(self):
         self.token_expiration = datetime.utcnow() - timedelta(seconds=1)
+    '''
 
+    def get_jwt(self, expires_in=600):
+        now = datetime.utcnow()
+        # 将用户id和名称等信息作为payload加入token中
+        payload = {
+            'user_id': self.id,
+            'name': self.username,
+            'exp': now + timedelta(seconds=expires_in),
+            'iat': now
+        }
+        # 使用jwt的加密算法进行加密
+        return jwt.encode(
+            payload,
+            current_app.config['SECRET_KEY'],
+            algorithm='HS256').decode('utf-8')
+
+    @staticmethod
+    def verify_jwt(token):
+        try:
+            # 进行解密验证
+            payload = jwt.decode(
+                token,
+                current_app.config['SECRET_KEY'],
+                algorithms=['HS256'])
+            # 如果token过期那么就验证失败，否则就返回id
+        except jwt.exceptions.ExpiredSignatureError as e:
+            return None
+        # return payload
+        return User.query.get(payload.get('user_id'))
+    # 由于jwt没办法回收，无法delete，所以不需要写revoke_jwt,只要等它自动过期即可，也因此有效时间不要设置的太长
+
+    def ping(self):
+        self.last_seen = datetime.utcnow()
+        db.session.add(self)
+
+    '''
     @staticmethod
     def check_token(token):
         user = User.query.filter_by(token=token).first()
         if user is None or user.token_expiration < datetime.utcnow():
             return None
         return user
+    '''
