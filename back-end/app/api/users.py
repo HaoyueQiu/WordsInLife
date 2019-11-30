@@ -52,11 +52,11 @@ def get_users():
     return jsonify(data)
 
 
-@bp.route('/users/<int:id>', methods=['GET'])
+@bp.route('/users/<string:username>', methods=['GET'])
 @token_auth.login_required
-def get_user(id):
+def get_user(username):
     """返回一个用户"""
-    return jsonify(User.query.get_or_404(id).to_dict())
+    return jsonify(User.query.get_or_404(username).to_dict())
 
 
 @bp.route('/users/<int:id>', methods=['PUT'])

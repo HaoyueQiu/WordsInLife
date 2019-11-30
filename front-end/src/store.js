@@ -12,8 +12,9 @@ export default {
       console.log('loginAction is triggered')
     }
     this.state.is_authenticated = true
-    const path = '/tokens'
-    axio.get(path,{'token':window.localStorage.getItem('token')},{
+
+    /*
+    axios.get(path,{params:{token:window.localStorage.getItem('token')}},{
       auth: {
         'username': this.loginForm.username,
         'password': this.loginForm.password
@@ -21,7 +22,8 @@ export default {
     }).then((response)=>{
       this.state.user_id = response.data.user_id
       console.log(this.state.user_id)
-    })
+      //router.push("/login")
+    })*/
   },
   logoutAction(){
     if(this.debug) console.log('logoutAction is triggered')

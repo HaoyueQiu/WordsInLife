@@ -11,7 +11,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 '''
-创建flask应用p
+创建flask应用
 '''
 def create_app(config_class=Config):
     app = Flask(__name__)

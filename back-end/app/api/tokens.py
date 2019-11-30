@@ -14,11 +14,10 @@ def get_token():
     return jsonify({'token': token})
 
 
-@bp.route('tokens',methods=['GET'])
+@bp.route('tokens', methods=['GET'])
 @basic_auth.login_required
 def get_id(token):
-    print('token')
-    return jsonify({'user_id': g.current_user.verify_jwt()})
+    return jsonify({'user_id': g.current_user.verify_jwt(token)})
 
 
 '''

@@ -1,10 +1,5 @@
 <template>
   <div class = "container">
-    <alert
-      v-if="sharedState.is_new"
-      v-bind:variant="alertVariant"
-      v-bind:message="alertMessage">
-    </alert>
     <h1>Sign In</h1>
     <div class="row">
       <!--bootstrap 的栅栏布局，能够简便的通过预定义的类做出布局，最多分为12列。
@@ -54,7 +49,6 @@
   export default {
     name:'Login',
     components:{
-      alert:Alert
     },
     data(){
       return {
@@ -73,8 +67,7 @@
     },
     methods:{
       onSubmit(e) {
-        console.log('come in')
-      //e 是干嘛的？！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！1
+        console.log('login submit')
         this.loginForm.submitted = true  // 先更新状态
         this.loginForm.errors = 0
         if (!this.loginForm.username) {
@@ -107,16 +100,11 @@
           window.localStorage.setItem('token',response.data.token)
           // store.resetNotNewAction()
           store.loginAction()
-          this.$toasted.success(`Welcome! ${name}!`, { icon: 'fingerprint' })
-          console.log("hi")
-          if(typeof  this.$route.query.redirect == 'undefined'){
-            this.$router.push('/')
-          }else{
-            this.$router.push(this.$route.query.redirect)
-          }
+          this.$router.push({path:'/profile'})
         })
           .catch((error)=>{
             //handle error
+            this.loginForm.passwordError = 'password Error!'
             console.log(error.response)
             /*
             if(error.response.status == 401){

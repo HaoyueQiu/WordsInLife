@@ -33,10 +33,15 @@ class PaginatedAPIMixin(object):
 
 
 class User(PaginatedAPIMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
+    id = db.Column(db.Integer)
+    username = db.Column(db.String(64), primary_key = True,index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))  # 不保存原始密码
+    name = db.Column(db.String(64))
+    location = db.Column(db.String(64))
+    about_me = db.Column(db.Text())
+    member_since = db.Column(db.DateTime(), default=datetime.utcnow)
+    last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
 
     # token = db.Column(db.String(32), index=True, unique=True)
     # token_expiration = db.Column(db.DateTime)
@@ -59,11 +64,15 @@ class User(PaginatedAPIMixin, db.Model):
         data = {
             'id': self.id,
             'username': self.username,
+            'name': self.name,
+            'location': self.location,
+            'about_me': self.about_me,
+            'member_since': self.member_since.isoformat() + 'Z',
+            'last_seen': self.last_seen.isoformat() + 'Z',
             '_links': {
                 'self': url_for('api.get_user', id=self.id)
             }
         }
-        # 只有当用户请求自己的数据时才包含 email
         if include_email:
             data['email'] = self.email
         return data
@@ -94,7 +103,7 @@ class User(PaginatedAPIMixin, db.Model):
         # 将用户id和名称等信息作为payload加入token中
         payload = {
             'user_id': self.id,
-            'name': self.username,
+            'name': self.name if self.name else self.username,
             'exp': now + timedelta(seconds=expires_in),
             'iat': now
         }
@@ -131,3 +140,4 @@ class User(PaginatedAPIMixin, db.Model):
             return None
         return user
     '''
+
