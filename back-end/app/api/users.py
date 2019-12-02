@@ -16,6 +16,9 @@ def create_user():
         return bad_request('You must post JSON data.')
 
     message = {}
+    '''
+    判断数据库是否已经存在这些 username 和 email
+    '''
     if 'username' not in data or not data.get('username', None):
         message['username'] = 'Please provide a valid username.'
     pattern = '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
@@ -28,6 +31,7 @@ def create_user():
         message['username'] = 'Please use a different username.'
     if User.query.filter_by(email=data.get('email', None)).first():
         message['email'] = 'Please use a different email address.'
+
     if message:
         return bad_request(message)
 
@@ -38,7 +42,8 @@ def create_user():
     response = jsonify(user.to_dict())
     response.status_code = 201
     # HTTP协议要求201响应包含一个值为新资源URL的Location头部
-    response.headers['Location'] = url_for('api.get_user', id=user.id)
+    response.headers['Location'] = url_for('api.get_user', username=user.username)
+    # response.headers['Location'] = url_for('api.get_user', id=user.id)
     return response
 
 

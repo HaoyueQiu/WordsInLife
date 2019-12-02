@@ -98,21 +98,16 @@
         }).then((response)=>{
           //handle success
           window.localStorage.setItem('token',response.data.token)
+          window.localStorage.setItem('info:username',this.loginForm.username)
           // store.resetNotNewAction()
           store.loginAction()
           this.$router.push({path:'/profile'})
+          //this.$router.push({path:`/profile${this.loginForm.username}`})
         })
           .catch((error)=>{
             //handle error
             this.loginForm.passwordError = 'password Error!'
             console.log(error.response)
-            /*
-            if(error.response.status == 401){
-              this.loginForm.usernameError = 'Invalid username or password'
-              this.loginForm.usernameError = 'Invalid username or password'
-            }else{
-              console.log(error.response)
-            }*/
           })
 
     }

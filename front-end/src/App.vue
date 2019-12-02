@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <navbar></navbar>
-    <!-- <login> </login> -->
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -17,7 +16,6 @@
     // https://cn.vuejs.org/v2/api/#name
     components:{
       navbar:Navbar,
-      // login:Login
     }
   }
 

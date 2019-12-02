@@ -97,9 +97,11 @@
           .then((response) => {
             // 成功注册，跳转到login界面
             this.$router.push('/login')
+
           })
           .catch((error) => {
             // handle error
+            console.log(error)
             for (let field in error.response.data.message) {
               if (field == 'username') {
                 this.registerForm.usernameError = error.response.data.message.username

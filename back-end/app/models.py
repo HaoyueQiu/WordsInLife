@@ -6,43 +6,13 @@ from datetime import datetime, timedelta
 from flask import url_for, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
-# 用于分页
-class PaginatedAPIMixin(object):
-    @staticmethod
-    def to_collection_dict(query, page, per_page, endpoint, **kwargs):
-        resources = query.paginate(page, per_page, False)
-        data = {
-            'items': [item.to_dict() for item in resources.items],
-            '_meta': {
-                'page': page,
-                'per_page': per_page,
-                'total_pages': resources.pages,
-                'total_items': resources.total
-            },
-            '_links': {
-                'self': url_for(endpoint, page=page, per_page=per_page,
-                                **kwargs),
-                'next': url_for(endpoint, page=page + 1, per_page=per_page,
-                                **kwargs) if resources.has_next else None,
-                'prev': url_for(endpoint, page=page - 1, per_page=per_page,
-                                **kwargs) if resources.has_prev else None
-            }
-        }
-        return data
-
-
-class User(PaginatedAPIMixin, db.Model):
-    id = db.Column(db.Integer)
-    username = db.Column(db.String(64), primary_key = True,index=True, unique=True)
+class User(db.Model):
+    __tablename__ = 'User'
+    username = db.Column(db.String(64), primary_key=True, index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))  # 不保存原始密码
     name = db.Column(db.String(64))
-    location = db.Column(db.String(64))
     about_me = db.Column(db.Text())
-    member_since = db.Column(db.DateTime(), default=datetime.utcnow)
-    last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
-
     # token = db.Column(db.String(32), index=True, unique=True)
     # token_expiration = db.Column(db.DateTime)
 
@@ -62,17 +32,11 @@ class User(PaginatedAPIMixin, db.Model):
 
     def to_dict(self, include_email=False):
         data = {
-            'id': self.id,
             'username': self.username,
             'name': self.name,
-            'location': self.location,
             'about_me': self.about_me,
-            'member_since': self.member_since.isoformat() + 'Z',
-            'last_seen': self.last_seen.isoformat() + 'Z',
-            '_links': {
-                'self': url_for('api.get_user', id=self.id)
-            }
         }
+
         if include_email:
             data['email'] = self.email
         return data
@@ -102,7 +66,7 @@ class User(PaginatedAPIMixin, db.Model):
         now = datetime.utcnow()
         # 将用户id和名称等信息作为payload加入token中
         payload = {
-            'user_id': self.id,
+            'username':self.username,
             'name': self.name if self.name else self.username,
             'exp': now + timedelta(seconds=expires_in),
             'iat': now
@@ -125,14 +89,15 @@ class User(PaginatedAPIMixin, db.Model):
         except jwt.exceptions.ExpiredSignatureError as e:
             return None
         # return payload
-        return User.query.get(payload.get('user_id'))
-    # 由于jwt没办法回收，无法delete，所以不需要写revoke_jwt,只要等它自动过期即可，也因此有效时间不要设置的太长
+        return User.query.get(payload.get('username'))
 
+    # 由于jwt没办法回收，无法delete，所以不需要写revoke_jwt,只要等它自动过期即可，也因此有效时间不要设置的太长
+    '''
     def ping(self):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
 
-    '''
+    
     @staticmethod
     def check_token(token):
         user = User.query.filter_by(token=token).first()
@@ -141,3 +106,15 @@ class User(PaginatedAPIMixin, db.Model):
         return user
     '''
 
+
+class WordSubject(db.Model):
+    __tablename__ = 'WordSubject'
+    wordsubject = db.Column(db.String(64), primary_key=True, index=True, unique=True)
+
+
+class Word(db.Model):
+    __tablename__ = 'Word'
+    word = db.Column(db.String(64), primary_key=True, index=True, unique=True)
+    meaning = db.Column(db.String(64))
+    # 外键，关联单词类别
+    word_subject = db.Column(db.String(64), db.ForeignKey('WordSubject.wordsubject'))

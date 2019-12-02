@@ -55,7 +55,8 @@
     name: 'Navbar',  //this is the name of the componen
     data() {
       return {
-        sharedState: store.state
+        sharedState: store.state,
+        username:store.state.username,
       }
     },
     methods:{

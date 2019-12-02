@@ -83,8 +83,6 @@ def run_migrations_online():
             connection=connection,
             target_metadata=target_metadata,
             process_revision_directives=process_revision_directives,
-            render_as_batch=True,
-            # 增加这个配置项,解决SQLite默认不支持删除列的问题
             **current_app.extensions['migrate'].configure_args
         )
 

@@ -9,12 +9,12 @@ from app.api.auth import basic_auth,token_auth
 def get_token():
     # token = g.current_user.get_token()
     token = g.current_user.get_jwt()
-    g.current_user.ping()
+    # g.current_user.ping()
     db.session.commit()
     return jsonify({'token': token})
 
 
-@bp.route('tokens', methods=['GET'])
+@bp.route('/tokens', methods=['GET'])
 @basic_auth.login_required
 def get_id(token):
     return jsonify({'user_id': g.current_user.verify_jwt(token)})
