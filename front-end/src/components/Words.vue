@@ -8,7 +8,6 @@
 </template>
 
 
-
 <script>
   import vueWaterfallEasy from 'vue-waterfall-easy'
 
@@ -26,10 +25,25 @@
 
     methods: {
       getData() {
-       var subject = ['fruit', 'animal', 'furniture','exercise','vegetable','bathroom']
-        for (var i = 0; i < subject.length; i++) {
-          this.imgsArr.push({src: `static/img/${subject[i]}.jpg`})
-        }
+
+        const path = '/words'
+        this.$axios.get(path)
+          .then(response => {
+            console.log(response)
+            var arr = []
+            for (var i = 0; i < response.data.length; i++) {
+                arr.push({src: `static/img/${response.data[i]}.jpg`})
+            }
+            this.imgsArr = this.imgsArr.concat(arr)
+            this.group++
+            console.log(this.imgsArr)
+          })
+
+        /*
+          var subject = ['fruit', 'animal', 'furniture','exercise','vegetable','bathroom']
+          for (var i = 0; i < subject.length; i++) {
+            this.imgsArr.push({src: `static/img/${subject[i]}.jpg`})
+          }*/
         console.log(this.imgsArr)
       }
 
@@ -42,7 +56,7 @@
 
 <style>
 
-  .vue-waterfall-easy{
-   position: fixed!important;
+  .vue-waterfall-easy {
+    position: fixed !important;
   }
 </style>
