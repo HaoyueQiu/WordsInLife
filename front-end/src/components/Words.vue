@@ -6,16 +6,14 @@
   </div>
 </template>
 
-
 <script>
   import vueWaterfallEasy from 'vue-waterfall-easy'
-
   export default {
     name: 'Words',
     data() {
       return {
         imgsArr: [],
-        group: 0
+        group: 0, //用于标记第几组图片的到来
       }
     },
     components: {
@@ -23,8 +21,7 @@
     },
 
     methods: {
-      getData() {
-
+      getData() {//从后端拉取数据
         const path = '/words'
         this.$axios.get(path)
           .then(response => {
@@ -37,16 +34,9 @@
             this.group++
             console.log(this.imgsArr)
           })
-
-        /*
-          var subject = ['fruit', 'animal', 'furniture','exercise','vegetable','bathroom']
-          for (var i = 0; i < subject.length; i++) {
-            this.imgsArr.push({src: `static/img/${subject[i]}.jpg`})
-          }*/
-        console.log(this.imgsArr)
       }
-
     },
+
     created() {
       this.getData()
     }
@@ -57,12 +47,11 @@
 <style>
 
   .vue-waterfall-easy-scroll {
-    width: 100%;
-    height:500px !important;
+    height: 500px !important;
   }
 
-  .vue-waterfall-easy{
-    height:500px !important;
+  .vue-waterfall-easy {
+    height: 600px !important;
   }
 
 </style>
