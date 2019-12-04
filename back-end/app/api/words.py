@@ -11,7 +11,7 @@ def get_words_subject():
     a = WordSubject.query.order_by(WordSubject.wordsubject).all()
     subject = []
     for i in range(len(a)):
-        for j in range(10):
+        for j in range(5):
             subject.append(a[i].wordsubject)
 
     '''

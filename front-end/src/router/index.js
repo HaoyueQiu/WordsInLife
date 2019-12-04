@@ -48,8 +48,7 @@ const router =  new Router({
       path:'/words',
       name:'Words',
       component:Words
-
-    }
+    },
   ]
 })
 

@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h1> hello </h1>
     <div id="content">
       <vue-waterfall-easy :imgsArr="imgsArr" @scrollReachBottom="getData"></vue-waterfall-easy>
     </div>
@@ -32,7 +31,7 @@
             console.log(response)
             var arr = []
             for (var i = 0; i < response.data.length; i++) {
-                arr.push({src: `static/img/${response.data[i]}.jpg`})
+              arr.push({src: `static/img/${response.data[i]}.jpg`})
             }
             this.imgsArr = this.imgsArr.concat(arr)
             this.group++
@@ -54,9 +53,19 @@
   }
 </script>
 
+
 <style>
 
-  .vue-waterfall-easy {
-    position: fixed !important;
+  .vue-waterfall-easy-scroll {
+    width: 100%;
+    height:500px !important;
   }
+
+  .vue-waterfall-easy{
+    height:500px !important;
+  }
+
 </style>
+
+
+
