@@ -5,7 +5,7 @@ import Home from '@/components/Home'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Profile from '@/components/Profile'
-import Words from '@/components/Words'
+import WordsSubject from '@/components/WordsSubject'
 
 Vue.use(Router)
 
@@ -45,9 +45,9 @@ const router =  new Router({
       component: Ping
     },
     {
-      path:'/words',
-      name:'Words',
-      component:Words
+      path:'/wordsSubject',
+      name:'WordsSubject',
+      component:WordsSubject
     },
   ]
 })
