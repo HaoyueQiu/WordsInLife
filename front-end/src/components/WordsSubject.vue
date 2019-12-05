@@ -17,6 +17,7 @@
     name: 'WordsSubject',
     data() {
       return {
+        imgLoc:`static/img/wordsSubject/`,
         imgsArr: [],
         group: 0, //用于标记第几组图片的到来
       }
@@ -33,7 +34,7 @@
             console.log(response)
             var arr = []
             for (var i = 0; i < response.data.length; i++) {
-              arr.push({src: `static/img/wordsSubject/${response.data[i]}.jpg`, info: response.data[i]})
+              arr.push({src: this.imgLoc + `${response.data[i]}.jpg`, info: response.data[i]})
             }
             this.imgsArr = this.imgsArr.concat(arr)
             this.group++
@@ -43,7 +44,6 @@
       clickPic(event, {index, value}) {
         console.log(index, value.info)
         this.$router.push('WordsSubject/'+value.info)
-
       }
     },
 

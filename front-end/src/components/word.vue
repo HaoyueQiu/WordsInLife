@@ -1,16 +1,18 @@
 <template>
   <div>
-    <p><img id="wordsImg" src="static/img/animal.jpg"/></p>
+    <p><img id="wordsImg" :src="imgSrc"/></p>
     <div>
-    <button type="button" class="btn btn-info" v-show="!isMeaningButtonClick" @click="clickMeaningButton">click to get answer</button>
+      <button type="button" class="btn btn-info" v-show="!isMeaningButtonClick" @click="clickMeaningButton">click to get
+        answer
+      </button>
     </div>
-    <p id="wordsMeaning" v-show="isMeaningButtonClick">Animal</p>
-    <p v-show="isMeaningButtonClick">动物</p>
+    <p id="wordsMeaning" v-show="isMeaningButtonClick">{{currentWord}}</p>
+    <p v-show="isMeaningButtonClick">{{currentWordCN}}</p>
 
     <div v-show="isMeaningButtonClick" class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-success">认识</button>
-      <button type="button" class="btn btn-warning">不确定</button>
-      <button type="button" class="btn btn-danger">不认识</button>
+      <button type="button" class="btn btn-success" @click="knowWord">认识</button>
+      <button type="button" class="btn btn-warning" @click="uncertainWord">不确定</button>
+      <button type="button" class="btn btn-danger" @click="unknowWord">不认识</button>
     </div>
   </div>
 
@@ -23,19 +25,89 @@
     data() {
       return {
         isMeaningButtonClick: false,
-        words:[],
-        subject:'',
+        words: [],
+        isKnow: [],//标记每个单词是否认识
+
+        subject: '',
+        currentPicNum: 0,
+        currentWord:'',
+        currentWordCN:'',
+
+        imgSrc: '',
+        imgLoc: "static/img/wordsSubject/",
+
+        isOver: false,
+
       }
     },
     methods: {
-      clickMeaningButton(){
-        this.isMeaningButtonClick = true
-        console.log(this.isMeaningButtonClick)
-        console.log(this.$route.path)
+      clickMeaningButton() {
+        this.isMeaningButtonClick = true;
+      },
+      getData() {
+        this.words = [{"EN":'animal',"CN":'动物'},
+          {"EN":'bathroom',"CN":'浴室'},
+          {"EN":'classroom',"CN":'教室'},
+          {"EN":'body',"CN":'身体'}];
+        this.isKnow = [false, false, false, false];
+      },
+      knowWord() {
+        //认识的单词就标记为已经认识不再背诵
+        this.isKnow[this.currentPicNum] = true;
+        this.refresh();
+      },
+      unknowWord() {
+        //不认识的单词放到队尾继续背诵
+        this.refresh();
+      },
+      uncertainWord() {
+        //不确定的单词
+        this.refresh();
+      },
+      refresh() {
+        this.nextWord();
+        console.log(this.words[this.currentPicNum]);
+        this.isMeaningButtonClick = false;
+        if (!this.isOver) {
+          this.currentWord=this.words[this.currentPicNum]['EN'];
+          this.currentWordCN = this.words[this.currentPicNum]['CN'];
+          this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
+        }else{
+          //背完这组单词后！
+          this.$router.push('/wordsSubject');
+        }
+      },
+      nextWord() {
+
+        let i = 0;
+        const wordsLength = this.words.length
+
+        for (; i <= wordsLength; ++i) {
+          //直接这样写并不能更改currentPicNum
+          // this.currentPicNum = (this.currentPicNum++)%wordsLength;
+          this.currentPicNum++;
+          this.currentPicNum = this.currentPicNum % wordsLength;
+          if (!this.isKnow[this.currentPicNum]) {
+            break;
+          }
+        }
+        //连续已被认识过的单词，如果等于单词数目，代表这个词组已背完。
+        if (i > wordsLength) {
+          this.isOver = true;
+        }
+
       }
     },
     created() {
-      console.log(this.$route.path)
+      console.log('is created')
+      const path = this.$route.path;
+      this.subject = path.substr(path.lastIndexOf('/') + 1);
+      console.log(this.subject);
+      this.getData();
+      this.currentWord = this.words[this.currentPicNum]['EN'];
+      this.currentWordCN = this.words[this.currentPicNum]['CN'];
+      this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
+
     }
   }
 

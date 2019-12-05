@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23e918dd-8eb4-4c36-8f46-2a51be209d44" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/app/api/words.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/app/api/words.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/components/WordsSubject.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/WordsSubject.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/components/word.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/word.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/http.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/http.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/router/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,17 +42,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front-end/src/components/WordsSubject.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
+            <state relative-caret-position="450">
+              <caret line="45" column="53" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end/src/components/word.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="137">
+              <caret line="107" column="22" selection-start-line="107" selection-start-column="22" selection-end-line="107" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/front-end/src/components/word.vue">
+        <entry file="file://$PROJECT_DIR$/back-end/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+            <state relative-caret-position="315">
+              <caret line="21" column="12" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -126,8 +134,8 @@
         <option value="$PROJECT_DIR$/front-end/src/http.js" />
         <option value="$PROJECT_DIR$/back-end/app/api/words.py" />
         <option value="$PROJECT_DIR$/front-end/src/router/index.js" />
-        <option value="$PROJECT_DIR$/front-end/src/components/word.vue" />
         <option value="$PROJECT_DIR$/front-end/src/components/WordsSubject.vue" />
+        <option value="$PROJECT_DIR$/front-end/src/components/word.vue" />
       </list>
     </option>
   </component>
@@ -135,6 +143,7 @@
     <option name="files">
       <list>
         <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/dataSources.xml" />
       </list>
     </option>
   </component>
@@ -166,40 +175,20 @@
             <path>
               <item name="WordsInLife" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\14114\Desktop\WordsInLife" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="back-end" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="WordsInLife" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\Users\14114\Desktop\WordsInLife" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="back-end" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="api" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="WordsInLife" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\Users\14114\Desktop\WordsInLife" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="front-end" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="WordsInLife" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\14114\Desktop\WordsInLife" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="front-end" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="WordsInLife" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\14114\Desktop\WordsInLife" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="front-end" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="WordsInLife" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\Users\14114\Desktop\WordsInLife" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="front-end" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="router" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="img" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -250,12 +239,12 @@
       <workItem from="1575292690060" duration="3513000" />
       <workItem from="1575335268117" duration="9976000" />
       <workItem from="1575426539335" duration="11210000" />
-      <workItem from="1575507508556" duration="8969000" />
+      <workItem from="1575507508556" duration="15197000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102346000" />
+    <option name="totallyTimeSpent" value="108574000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -270,7 +259,7 @@
     <frame x="977" y="0" width="995" height="789" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21024546" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21024546" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -290,7 +279,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" weight="0.32977587" />
+      <window_info active="true" anchor="right" id="Database" order="4" visible="true" weight="0.032017075" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21237993" />
@@ -440,16 +429,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/back-end/requirements.txt">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/back-end/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/back-end/app/api/auth.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -644,15 +623,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/components/WordsSubject.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
+        <state relative-caret-position="450">
+          <caret line="45" column="53" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/components/word.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+        <state relative-caret-position="137">
+          <caret line="107" column="22" selection-start-line="107" selection-start-column="22" selection-end-line="107" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back-end/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="12" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
