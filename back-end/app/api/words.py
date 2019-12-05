@@ -7,12 +7,10 @@ from app.models import WordSubject
 
 @bp.route('/words', methods=['GET'])
 def get_words_subject():
-
     a = WordSubject.query.order_by(WordSubject.wordsubject).all()
     subject = []
     for i in range(len(a)):
-        for j in range(5):
-            subject.append(a[i].wordsubject)
+        subject.append(a[i].wordsubject)
 
     '''
     subject = ['body', 'classroom', 'food', 'job', 'kitchen', 'plant', 'vehicles', 'stationery']

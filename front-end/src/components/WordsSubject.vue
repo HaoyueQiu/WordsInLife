@@ -33,7 +33,7 @@
             console.log(response)
             var arr = []
             for (var i = 0; i < response.data.length; i++) {
-              arr.push({src: `static/img/${response.data[i]}.jpg`, info: response.data[i]})
+              arr.push({src: `static/img/wordsSubject/${response.data[i]}.jpg`, info: response.data[i]})
             }
             this.imgsArr = this.imgsArr.concat(arr)
             this.group++
@@ -55,14 +55,21 @@
 
 
 <style>
-
-  .vue-waterfall-easy-scroll {
-    width:100% !important;
-    height: 500px !important;
-  }
-
   .vue-waterfall-easy {
     height: 600px !important;
+  }
+  @media screen and (max-width: 1500px){
+    .vue-waterfall-easy-scroll {
+      height: 500px !important;
+      width: 780px !important;
+    }
+  }
+
+    @media screen and (min-width:1500px){
+    .vue-waterfall-easy-scroll {
+      height: 600px !important;
+      width: 1300px !important;
+    }
   }
 
 </style>

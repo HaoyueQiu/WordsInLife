@@ -5,6 +5,10 @@ axios.defaults.baseURL = 'http://localhost:5000/api'
 
 axios.interceptors.response.use(function (response) {
   // Do something with response data
+   const token = window.localStorage.getItem('token')
+  if (token) {
+    response.headers.Authorization = `Bearer ${token}`
+  }
   return response
 }, function (error) {
   // Do something with response error
