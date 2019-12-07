@@ -30,8 +30,8 @@
 
         subject: '',
         currentPicNum: 0,
-        currentWord:'',
-        currentWordCN:'',
+        currentWord: '',
+        currentWordCN: '',
 
         imgSrc: '',
         imgLoc: "static/img/wordsSubject/",
@@ -45,38 +45,53 @@
         this.isMeaningButtonClick = true;
       },
       getData() {
-        this.words = [{"EN":'animal',"CN":'动物'},
-          {"EN":'bathroom',"CN":'浴室'},
-          {"EN":'classroom',"CN":'教室'},
-          {"EN":'body',"CN":'身体'}];
-        this.isKnow = [false, false, false, false];
+        this.words = [{"EN": 'animal', "CN": '动物'}]
+        const path = '/words'
+        this.$axios.get(path)
+          .then(response => {
+            console.log(response.data)
+            this.words = response.data;
+          })
+        //如何快速初始化一个长度的array？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+        for (let i = 0; i != this.words.length; ++i) {
+          this.isKnow.push(false);
+        }
       },
+      clickPic(event, {index, value}) {
+        console.log(index, value.info)
+        this.$router.push('WordsSubject/' + value.info)
+      },
+
       knowWord() {
         //认识的单词就标记为已经认识不再背诵
         this.isKnow[this.currentPicNum] = true;
         this.refresh();
-      },
+      }
+      ,
       unknowWord() {
         //不认识的单词放到队尾继续背诵
         this.refresh();
-      },
+      }
+      ,
       uncertainWord() {
         //不确定的单词
         this.refresh();
-      },
+      }
+      ,
       refresh() {
         this.nextWord();
         console.log(this.words[this.currentPicNum]);
         this.isMeaningButtonClick = false;
         if (!this.isOver) {
-          this.currentWord=this.words[this.currentPicNum]['EN'];
+          this.currentWord = this.words[this.currentPicNum]['EN'];
           this.currentWordCN = this.words[this.currentPicNum]['CN'];
           this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
-        }else{
+        } else {
           //背完这组单词后！
           this.$router.push('/wordsSubject');
         }
-      },
+      }
+      ,
       nextWord() {
 
         let i = 0;
@@ -97,7 +112,8 @@
         }
 
       }
-    },
+    }
+    ,
     created() {
       console.log('is created')
       const path = this.$route.path;
@@ -124,7 +140,7 @@
   }
 
   #wordsImg {
-    width: 200px;
+    width: 400px;
     height: auto;
     top: 400px;
   }

@@ -28,7 +28,7 @@
 
     methods: {
       getData() {//从后端拉取数据
-        const path = '/words'
+        const path = '/wordSubject'
         this.$axios.get(path)
           .then(response => {
             console.log(response)
