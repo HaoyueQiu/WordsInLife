@@ -45,14 +45,18 @@
         this.isMeaningButtonClick = true;
       },
       getData() {
-        this.words = [{"EN": 'animal', "CN": '动物'}]
+
         const path = '/words'
-        this.$axios.get(path)
+        this.$axios.get(path,
+          {
+            params: {
+              wordsubject: this.subject
+            }
+          })
           .then(response => {
             console.log(response.data)
-            this.words = response.data;
+            this.words.concat(response.data);
           })
-        //如何快速初始化一个长度的array？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
         for (let i = 0; i != this.words.length; ++i) {
           this.isKnow.push(false);
         }
@@ -110,6 +114,7 @@
         if (i > wordsLength) {
           this.isOver = true;
         }
+        console.log(i,wordsLength,this.isOver)
 
       }
     }
@@ -119,6 +124,7 @@
       const path = this.$route.path;
       this.subject = path.substr(path.lastIndexOf('/') + 1);
       console.log(this.subject);
+      this.words = [{"EN": this.subject, "CN": ''}]
       this.getData();
       this.currentWord = this.words[this.currentPicNum]['EN'];
       this.currentWordCN = this.words[this.currentPicNum]['CN'];

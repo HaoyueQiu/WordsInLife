@@ -3,7 +3,7 @@ from app import db
 from app.api import bp
 from app.api.auth import basic_auth, token_auth
 from app.models import WordSubject, Word
-
+from flask import request
 
 @bp.route('/wordSubject', methods=['GET'])
 def get_words_subject():
@@ -24,11 +24,12 @@ def get_words_subject():
 
 
 @bp.route('/words', methods=['GET'])
-#def get_word(wordSubject):
 def get_word():
-    # 后续改成类别！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！11
-    a = Word.query.all()
+    wordsubject = request.args.get('wordsubject')
+    a = Word.query.filter_by(word_subject=wordsubject).all()
     words = []
     for i in range(len(a)):
         words.append({'EN': a[i].word, 'CN': a[i].meaning})
     return jsonify(words)
+
+

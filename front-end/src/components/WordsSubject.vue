@@ -34,7 +34,7 @@
             console.log(response)
             var arr = []
             for (var i = 0; i < response.data.length; i++) {
-              arr.push({src: this.imgLoc + `${response.data[i]}.jpg`, info: response.data[i]})
+              arr.push({src: this.imgLoc + response.data[i] + '/'+`${response.data[i]}.jpg`, info: response.data[i]})
             }
             this.imgsArr = this.imgsArr.concat(arr)
             this.group++
