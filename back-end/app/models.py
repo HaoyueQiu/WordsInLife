@@ -118,3 +118,22 @@ class Word(db.Model):
     meaning = db.Column(db.String(64))
     # 外键，关联单词类别
     word_subject = db.Column(db.String(64), db.ForeignKey('WordSubject.wordsubject'))
+
+
+class Game(db.Model):
+    __tablename__='Game'
+    img_name = db.Column(db.String(64),primary_key=True,index=True,unique=True)
+    # 外键，关联单词类别
+    word_subject = db.Column(db.String(64), db.ForeignKey('WordSubject.wordsubject'))
+
+class GameWord(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    # 存矩形范围
+    x = db.Column(db.Integer)
+    y = db.Column(db.Integer)
+    h = db.Column(db.Integer)
+    w = db.Column(db.Integer)
+    word = db.Column(db.ForeignKey('Word.word'))
+    word_subject = db.Column(db.String(64), db.ForeignKey('WordSubject.wordsubject'))
+    game_img = db.Column(db.ForeignKey('Game.img_name'))

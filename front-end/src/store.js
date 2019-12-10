@@ -5,6 +5,8 @@ export default {
     // 用户登录后，就算刷新页面也能再次计算出 user_id，通过获取的token JSON文件进行解析
     username:window.localStorage.getItem('info:username'),
     // is_new: false
+    editImgSrc:'',
+
   },
   loginAction(){
     console.log('loginAction is triggered')

@@ -7,6 +7,9 @@ import Login from '@/components/Login'
 import Profile from '@/components/Profile'
 import WordsSubject from '@/components/WordsSubject'
 import Word from '@/components/Word'
+import Game from '@/components/Game'
+import EditGame from '@/components/EditGame'
+
 Vue.use(Router)
 
 //暴露路由接口
@@ -53,7 +56,17 @@ const router =  new Router({
       path:'/wordsSubject/:subject',
       name:'words',
       component:Word
-    }
+    },
+    {
+      path:'/game',
+      name:'game',
+      component:Game,
+    },
+    {
+      path:'/editGame',
+      name:'EditGame',
+      component:EditGame,
+    },
   ]
 })
 

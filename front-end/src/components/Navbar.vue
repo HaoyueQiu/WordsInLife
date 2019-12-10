@@ -19,6 +19,9 @@
           <li class="nav-item">
             <router-link to="/wordsSubject" class="nav-link">Words</router-link>
           </li>
+          <li class="nav-item">
+            <router-link to="/game" class="nav-link">Game</router-link>
+          </li>
         </ul>
 
         <form class="form-inline navbar-left mr-auto">
