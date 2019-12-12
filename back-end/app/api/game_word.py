@@ -40,3 +40,11 @@ def add_game_words():
     return response
 
 
+@bp.route('/game_word', methods=['GET'])
+def get_game_words_loc():
+    game_img = request.args.get('game_img')
+    a = GameWord.query.filter_by(word_subject=wordsubject).all()
+    words = []
+    for i in range(len(a)):
+        words.append({'EN': a[i].word, 'CN': a[i].meaning})
+    return jsonify(words)

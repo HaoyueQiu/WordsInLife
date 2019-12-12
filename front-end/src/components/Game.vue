@@ -2,7 +2,7 @@
   <div class="container">
     <vue-waterfall-easy :imgsArr="imgsArr" @scrollReachBottom="getData" @click="clickPic">
       <div class="img-info" slot-scope="props">
-        <p class="some-info">{{props.value.info}}</p>
+        <p class="some-info">{{props.value.info['word_subject']}}</p>
       </div>
     </vue-waterfall-easy>
     <input type="file" id="choseFile" @change="onFileChange">
@@ -43,7 +43,7 @@
             console.log(response);
             var arr = [];
             for (var i = 0; i < response.data.length; i++) {
-              arr.push({src: this.imgLoc + response.data[i]['EN'] + '.jpg', info: response.data[i]['word_subject']})
+              arr.push({src: this.imgLoc + response.data[i]['EN'] + '.jpg', info: {'word_subject':response.data[i]['word_subject'],'img_name':response.data[i]['EN']}})
             }
             this.imgsArr = this.imgsArr.concat(arr);
             this.group++;
@@ -51,8 +51,7 @@
           })
       },
       clickPic(event, {index, value}) {
-        console.log(index, value.info);
-        this.$router.push('game/' + value.info);
+        this.$router.push('game/' + value.info['img_name']);
       }
     },
 

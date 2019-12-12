@@ -64,10 +64,6 @@
         console.log(this.words);
         console.log(this.isKnow);
       },
-      clickPic(event, {index, value}) {
-        console.log(index, value.info)
-        this.$router.push('WordsSubject/' + value.info)
-      },
 
       knowWord() {
         //认识的单词就标记为已经认识不再背诵
@@ -136,7 +132,7 @@
 </script>
 
 
-<style>
+<style scoped>
   * {
     text-align: center;
   }

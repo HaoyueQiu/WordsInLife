@@ -9,6 +9,7 @@ import WordsSubject from '@/components/WordsSubject'
 import Word from '@/components/Word'
 import Game from '@/components/Game'
 import EditGame from '@/components/EditGame'
+import GamePlay from '@/components/GamePlay'
 
 Vue.use(Router)
 
@@ -61,6 +62,11 @@ const router =  new Router({
       path:'/game',
       name:'game',
       component:Game,
+    },
+    {
+      path:'/game/:game_pic',
+      name:'gamePlay',
+      component:GamePlay,
     },
     {
       path:'/editGame',
