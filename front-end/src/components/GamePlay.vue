@@ -1,14 +1,13 @@
 <template>
   <div>
-    <p id="game_question">Where is the Apple?</p>
+    <p id="game_question">Where is the {{currentWord}}?</p>
     <button id="answer_button" type="button" class="btn btn-info" v-show="!isAnswerButtonClick"
             @click="clickMeaningButton">click to get
       answer
     </button>
-    <p><img id="wordsImg" :src="imgSrc" @click="testClick"/></p>
-    <div>
 
-    </div>
+    <p><img id="gameImg" :src="imgSrc" @click="testClick"/></p>
+
   </div>
 </template>
 
@@ -18,16 +17,14 @@
     data() {
       return {
         isAnswerButtonClick: false,
+        words_loc: {},
         words: [],
-
         currentWord: '',
         currentWordCN: '',
+        currentWordNum: 0,
 
         imgSrc: '',
         imgLoc: "static/img/Game/",
-
-        isOver: false,
-
         game_img: null,
 
       }
@@ -46,31 +43,49 @@
         this.isAnswerButtonClick = true;
       },
       getData() {
-        /*
-        const path = '/words'
+        const path = '/game_word';
         this.$axios.get(path,
           {
             params: {
-              wordsubject: this.subject
+              game_img: this.game_img
             }
           })
           .then(response => {
-            console.log(response.data)
-            this.words = this.words.concat(response.data);
+            console.log(response.data);
+            this.words_loc = response.data;
+            for (let key in this.words_loc) {
+              this.words.push(key);
+            }
+            console.log('game word list', this.words);
+            this.isOver();
+            this.currentWord = this.words[this.currentWordNum];
+            console.log(this.currentWord)
           })
 
-        for (let i = 0; i != this.words.length; ++i) {
-          this.isKnow.push(false);
-        }
-        console.log(this.words);
-        console.log(this.isKnow);
-        */
       },
-      testClick(e){
-        console.log(e);
-        let picX = e.screenX -300;
-        let picY = e.screenY -400;
-        console.log(picX,picY);
+      isOver() {
+        console.log('this.currentWordNum',this.currentWordNum);
+        if (this.currentWordNum >= this.words.length) {
+          this.$router.push('/game')
+        }else{
+          this.currentWord = this.words[this.currentWordNum];
+        }
+      },
+      testClick(e) {
+        let picX = e.offsetX;
+        let picY = e.offsetY;
+        console.log(picX, picY);
+        console.log(this.words_loc);
+        let loc = this.words_loc[this.currentWord];
+        console.log(loc);
+        for (let i = 0; i < loc.length; ++i) {
+          console.log(i);
+          if(picX > loc[i][0] && picX < loc[i][2] && picY > loc[i][1] && picY < loc[i][3]){
+            this.currentWordNum++;
+            this.isOver();
+            break;
+          }
+        }
       },
     }
   }
@@ -89,11 +104,11 @@
     margin-left: 300px;
   }
 
-  #wordsImg {
+  #gameImg {
     /*width: 400px;
     height: auto;*/
     margin-left: 300px;
-    top: 400px;
+    margin-top: 5px;
   }
 
   @media screen and (max-width: 1200px) {

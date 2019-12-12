@@ -43,8 +43,13 @@ def add_game_words():
 @bp.route('/game_word', methods=['GET'])
 def get_game_words_loc():
     game_img = request.args.get('game_img')
-    a = GameWord.query.filter_by(word_subject=wordsubject).all()
-    words = []
-    for i in range(len(a)):
-        words.append({'EN': a[i].word, 'CN': a[i].meaning})
-    return jsonify(words)
+    a = GameWord.query.filter_by(game_img=game_img).order_by(GameWord.word).all()
+    pre_word = ''
+    words_locs = {}
+    for i in a:
+        if i.word != pre_word:
+            words_locs[i.word] = [[i.x1,i.y1,i.x2,i.y2]]
+        else:
+            words_locs[i.word].append([i.x1,i.y1,i.x2,i.y2])
+        pre_word = i.word
+    return jsonify(words_locs)
