@@ -34,7 +34,6 @@ def add_game_words():
         game_word.set_game_word(attr)
         db.session.add(game_word)
         db.session.commit()
-        print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',i)
 
     response = jsonify(game_word.to_dict())
     response.status_code = 201

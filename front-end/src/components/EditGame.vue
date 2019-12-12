@@ -11,7 +11,7 @@
           <!--form-group 便捷创造bootstrap表单https://getbootstrap.com/docs/4.3/components/forms/-->
           <div class="form-group">
             <input id="word_now" v-model="currentWord" placeholder="word" class="form-control">
-            <div v-show="wordError" class="invalid-feedback">{{ wordError }}</div>
+            <div v-show="wordError" >{{ wordError }}</div>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -38,7 +38,7 @@
     name: 'EditGame',
     data() {
       return {
-        game_img:'',
+        game_img: '',
         editImgSrc: 'static/img/Game/fruits0.jpeg',
         imgLoc: `static/img/Game/`,
         currentTool: '',//当前选择的工具
@@ -56,8 +56,8 @@
         currentWord: '',
         mouseFromList: [],
         mouseToList: [],
-        imgInstance:null,
-        wordError:null,
+        imgInstance: null,
+        wordError: null,
       }
     },
     components: {},
@@ -70,8 +70,8 @@
       }
     },
     created() {
-      const loc =store.state.editImgSrc.indexOf('.');
-      this.game_img = store.state.editImgSrc.substr(0,loc);
+      const loc = store.state.editImgSrc.indexOf('.');
+      this.game_img = store.state.editImgSrc.substr(0, loc);
       console.log(this.game_img);
       this.editImgSrc = this.imgLoc + store.state.editImgSrc;
       console.log(this.editImgSrc)
@@ -82,8 +82,6 @@
     },
     methods: {
       initCanvas() {
-        this.mouseFromList= [];
-        this.mouseToList = [];
         this.fabricObj = new fabric.Canvas('canvas', {});
         //加载图片
         let imgElement = document.getElementById('my-img');
@@ -133,6 +131,7 @@
             e.target.opacity = 1;
           },
           'selection:created': (e) => {
+            console.log(e);
             if (e.target._objects) {
               //多选删除
               var etCount = e.target._objects.length;
@@ -140,6 +139,7 @@
                 this.fabricObj.remove(e.target._objects[etindex]);
               }
             } else {
+              console.log(e.target);
               //单选删除
               this.fabricObj.remove(e.target);
             }
@@ -152,6 +152,22 @@
         this.fabricObj.selection = false;
         this.fabricObj.skipTargetFind = true;
       },
+      setClearState() {
+
+        this.mouseFromList = [];
+        this.mouseToList = [];
+        // fabricObj.clear 会把包括背景在内的东西都清空，因此再把背景加回去。
+        this.fabricObj = new fabric.Canvas('canvas', {});
+        //添加背景
+        console.log('imgInstance',this.imgInstance);
+        this.fabricObj.setBackgroundImage(this.imgInstance);
+        this.fabricObj.setWidth(this.imgInstance.width);
+        this.fabricObj.setHeight(this.imgInstance.height);
+        console.log(this.fabricObj);
+        this.fabricObjAddEvent();
+
+      },
+
       handleTools(tools) {
         this.currentTool = tools;
         this.fabricObj.isDrawingMode = false;
@@ -163,8 +179,10 @@
             this.fabricObj.selectable = true;
             break;
           case 'clear':
+            console.log(this.fabricObj);
             this.fabricObj.clear();
-            this.initCanvas();
+            console.log(this.fabricObj);
+            this.setClearState();
             break;
           default:
             break;
@@ -203,7 +221,7 @@
               top: this.mouseFrom.y,
               stroke: this.drawColor,
               strokeWidth: this.drawWidth,
-              fill: "rgba(255, 255, 255, 0)"
+              fill: "rgba(255, 255, 255, 0)",
             });
             break;
           case 'remove':
@@ -212,18 +230,18 @@
             break;
         }
         if (fabricObject) {
-          this.fabricObj.add(fabricObject)
+          this.fabricObj.add(fabricObject);
           this.drawingObject = fabricObject;
         }
       },
       onSubmit() {
-
+        this.wordError=null;
         console.log('submit word');
         console.log(this.mouseFromList, this.mouseToList);
         console.log(this.currentWord);
         const path = '/game_word';
         const payload = {
-          word:this.currentWord,
+          word: this.currentWord,
           game_img: this.game_img,
           mouseFromList: this.mouseFromList,
           mouseToList: this.mouseToList,
@@ -231,18 +249,17 @@
         console.log(payload);
         this.$axios.post(path, payload)
           .then((response) => {
-              console.log(response)
+            console.log(response)
           })
           .catch((error) => {
-            // handle error
-            console.log(error);
-            for (let field in error.response.data.message) {
-              if (field == 'word') {
-                this.wordError = error.response.data.message.word;
-              }
+              // handle error
+              console.log(error.response.data.message);
+              this.wordError = error.response.data.message['word'];
+              console.log(this.wordError);
             }
-          })
-        this.initCanvas();
+          );
+        this.currentWord='';
+        this.handleTools('clear');
       },
       deepClone(obj) {
         //JS数组浅拷贝怎么办，使用JSON转化以下再转化回去，这时候得到深拷贝的内容

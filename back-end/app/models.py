@@ -132,10 +132,10 @@ class Game(db.Model):
 class GameWord(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     # 存矩形范围
-    x1 = db.Column(db.Integer)
-    y1 = db.Column(db.Integer)
-    x2 = db.Column(db.Integer)
-    y2 = db.Column(db.Integer)
+    x1 = db.Column(db.Integer,nullable=False)
+    y1 = db.Column(db.Integer,nullable=False)
+    x2 = db.Column(db.Integer,nullable=False)
+    y2 = db.Column(db.Integer,nullable=False)
     word = db.Column(db.ForeignKey('Word.word'))
     game_img = db.Column(db.ForeignKey('Game.img_name'))
 
