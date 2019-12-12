@@ -6,14 +6,24 @@
              @click="handleTools(tool)">
           <button type="button" class="btn btn-outline-dark">{{tool}}</button>
         </div>
+        <form @submit.prevent="onSubmit">
+
+          <!--form-group 便捷创造bootstrap表单https://getbootstrap.com/docs/4.3/components/forms/-->
+          <div class="form-group">
+            <input id="word_now" v-model="currentWord" placeholder="word" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
     </div>
 
     <div class="canvas-wrapper">
       <canvas id="canvas" ref="canvas"></canvas>
     </div>
+
+
     <div id="img1">
-      <img :src="editImgSrc" id="my-img" >
+      <img :src="editImgSrc" id="my-img">
     </div>
   </div>
 </template>
@@ -42,6 +52,7 @@
         drawColor: '#E34F51',
         drawWidth: 2,
         zoom: window.zoom ? window.zoom : 1,
+        currentWord: '',
       }
     },
     components: {},
@@ -49,7 +60,7 @@
       canvasWidth() {
         return window.innerWidth;
       },
-      canvasHeight(){
+      canvasHeight() {
         return window.innerHeight;
       }
     },
@@ -64,16 +75,14 @@
     methods: {
       initCanvas() {
         this.fabricObj = new fabric.Canvas('canvas', {});
-        console.log(this.fabricObj);
+
         let img0 = 'static/img/Game/fruits0.jpeg';
         //加载图片
         let imgElement = document.getElementById('my-img');
-        let imgInstance = new fabric.Image(imgElement, {
-        });
+        let imgInstance = new fabric.Image(imgElement, {});
 
         //添加背景
         this.fabricObj.setBackgroundImage(imgInstance);
-        console.log(this.canvasWidth);
         this.fabricObj.setWidth(imgInstance.width);
         this.fabricObj.setHeight(imgInstance.height);
         //绑定画板事件
@@ -94,6 +103,8 @@
             this.drawingObject = null;
             this.moveCount = 1;
             this.doDrawing = false;
+            console.log(this.mouseFrom)
+            console.log(this.mouseTo)
           },
           'mouse:move': (o) => {
             if (this.moveCount % 2 && !this.doDrawing) {
@@ -147,7 +158,6 @@
         }
       },
       drawing() {
-        console.log(this.drawingObject)
         if (this.drawingObject) {
           this.fabricObj.remove(this.drawingObject)
         }
@@ -211,14 +221,16 @@
     position: absolute;
     margin-left: 300px;
   }
-  #my-img{
+
+  #my-img {
     width: 0.1px;
-    height:0.1px;
+    height: 0.1px;
     display: none;
   }
-  #img1{
+
+  #img1 {
     position: absolute;
-    margin-left:0px;
+    margin-left: 0px;
   }
 </style>
 
