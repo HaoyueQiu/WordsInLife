@@ -55,11 +55,14 @@
           })
           .then(response => {
             console.log(response.data)
-            this.words.concat(response.data);
+            this.words = this.words.concat(response.data);
           })
+
         for (let i = 0; i != this.words.length; ++i) {
           this.isKnow.push(false);
         }
+        console.log(this.words);
+        console.log(this.isKnow);
       },
       clickPic(event, {index, value}) {
         console.log(index, value.info)
@@ -84,7 +87,6 @@
       ,
       refresh() {
         this.nextWord();
-        console.log(this.words[this.currentPicNum]);
         this.isMeaningButtonClick = false;
         if (!this.isOver) {
           this.currentWord = this.words[this.currentPicNum]['EN'];
@@ -114,13 +116,12 @@
         if (i > wordsLength) {
           this.isOver = true;
         }
-        console.log(i,wordsLength,this.isOver)
 
       }
     }
     ,
     created() {
-      console.log('is created')
+      console.log('words is created')
       const path = this.$route.path;
       this.subject = path.substr(path.lastIndexOf('/') + 1);
       console.log(this.subject);
@@ -129,7 +130,6 @@
       this.currentWord = this.words[this.currentPicNum]['EN'];
       this.currentWordCN = this.words[this.currentPicNum]['CN'];
       this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
-
     }
   }
 

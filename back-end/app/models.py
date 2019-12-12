@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from flask import url_for, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 class User(db.Model):
     __tablename__ = 'User'
     username = db.Column(db.String(64), primary_key=True, index=True, unique=True)
@@ -13,6 +14,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(128))  # 不保存原始密码
     name = db.Column(db.String(64))
     about_me = db.Column(db.Text())
+
     # token = db.Column(db.String(32), index=True, unique=True)
     # token_expiration = db.Column(db.DateTime)
 
@@ -66,7 +68,7 @@ class User(db.Model):
         now = datetime.utcnow()
         # 将用户id和名称等信息作为payload加入token中
         payload = {
-            'username':self.username,
+            'username': self.username,
             'name': self.name if self.name else self.username,
             'exp': now + timedelta(seconds=expires_in),
             'iat': now
@@ -121,19 +123,31 @@ class Word(db.Model):
 
 
 class Game(db.Model):
-    __tablename__='Game'
-    img_name = db.Column(db.String(64),primary_key=True,index=True,unique=True)
+    __tablename__ = 'Game'
+    img_name = db.Column(db.String(64), primary_key=True, index=True, unique=True)
     # 外键，关联单词类别
     word_subject = db.Column(db.String(64), db.ForeignKey('WordSubject.wordsubject'))
 
-class GameWord(db.Model):
 
-    id = db.Column(db.Integer, primary_key=True)
+class GameWord(db.Model):
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     # 存矩形范围
-    x = db.Column(db.Integer)
-    y = db.Column(db.Integer)
-    h = db.Column(db.Integer)
-    w = db.Column(db.Integer)
+    x1 = db.Column(db.Integer)
+    y1 = db.Column(db.Integer)
+    x2 = db.Column(db.Integer)
+    y2 = db.Column(db.Integer)
     word = db.Column(db.ForeignKey('Word.word'))
-    word_subject = db.Column(db.String(64), db.ForeignKey('WordSubject.wordsubject'))
     game_img = db.Column(db.ForeignKey('Game.img_name'))
+
+    def set_game_word(self, data):
+        for field in ['x1', 'y1', 'x2', 'y2', 'word', 'game_img']:
+            if field in data:
+                setattr(self, field, data[field])
+
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'word': self.word,
+            'game_img': self.game_img,
+        }
+        return data

@@ -13,11 +13,12 @@ def add_game():
     if(data.get('img_name') in GameWord.query.all().)):
      """
 
-
+# 获取游戏图的名字和类别
 @bp.route('/game', methods=['GET'])
-def get_words():
+def get_game_pic():
     a = Game.query.all()
     words = []
     for i in range(len(a)):
         words.append({'EN': a[i].img_name, 'word_subject': a[i].word_subject})
     return jsonify(words)
+

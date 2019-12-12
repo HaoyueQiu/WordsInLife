@@ -59,24 +59,24 @@
 
         if (!this.registerForm.username) {
           this.registerForm.usernameError = 'Username required.'
-          this.isFormRight = false
+          this.registerForm.isFormRight = false
         } else {
           this.registerForm.usernameError = null
         }
 
         if (!this.registerForm.email) {
           this.registerForm.emailError = 'Email required.'
-          this.isFormRight = false
+          this.registerForm.isFormRight = false
         } else if (!this.validEmail(this.registerForm.email)) {
           this.registerForm.emailError = 'Valid email required.'
-          this.isFormRight = false
+          this.registerForm.isFormRight = false
         } else {
           this.registerForm.emailError = null
         }
 
         if (!this.registerForm.password) {
           this.registerForm.passwordError = 'Password required.'
-          this.isFormRight = false
+          this.registerForm.isFormRight = false
         } else {
           this.registerForm.passwordError = null
         }
@@ -85,19 +85,18 @@
           // 表单验证没通过时，不继续往下执行，即不会通过 axios 调用后端API
           return false
         }
-        console.log('register: to api')
-        const path = '/users'
+        console.log('register: to api');
+        const path = '/users';
         const payload = {
           username: this.registerForm.username,
           email: this.registerForm.email,
           password: this.registerForm.password
-        }
-        console.log(payload)
+        };
+        console.log(payload);
         this.$axios.post(path, payload)
           .then((response) => {
             // 成功注册，跳转到login界面
             this.$router.push('/login')
-
           })
           .catch((error) => {
             // handle error
