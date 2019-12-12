@@ -1,15 +1,19 @@
 <template>
   <div class="wraper">
-
-    <div class="btn-group-vertical">
-      <div v-for="tool in toolsArr" :key="tool"
-           @click="handleTools(tool)">
-        <button type="button" class="btn btn-outline-dark">{{tool}}</button>
+    <div class="controlPanel">
+      <div class="btn-group-vertical">
+        <div v-for="tool in toolsArr" :key="tool"
+             @click="handleTools(tool)">
+          <button type="button" class="btn btn-outline-dark">{{tool}}</button>
+        </div>
       </div>
-      <div class="canvas-wraper">
-        <canvas id="canvas" ref="canvas"></canvas>
-      </div>
+    </div>
 
+    <div class="canvas-wrapper">
+      <canvas id="canvas" ref="canvas"></canvas>
+    </div>
+    <div id="img1">
+      <img :src="editImgSrc" id="my-img" >
     </div>
   </div>
 </template>
@@ -18,21 +22,22 @@
   import store from '../store.js'
   import {fabric} from 'fabric'
 
+
   export default {
     name: 'EditGame',
     data() {
       return {
-        editImgSrc: '',
+        imgObj: {src: ''},
+        editImgSrc: 'static/img/Game/fruits0.jpeg',
         imgLoc: `static/img/Game/`,
-        currentTool: '',
+        currentTool: '',//当前选择的工具
         done: false,
-        fabricObj: null,
+        fabricObj: null,//绘制的图像
         toolsArr: ['rectangle', 'remove'],
         mouseFrom: {},
         mouseTo: {},
         moveCount: 1,
         doDrawing: false,
-        fabricHistoryJson: [],
         drawingObject: null, //绘制对象
         drawColor: '#E34F51',
         drawWidth: 2,
@@ -42,8 +47,15 @@
     components: {},
     computed: {
       canvasWidth() {
-        return window.innerWidth
+        return window.innerWidth;
+      },
+      canvasHeight(){
+        return window.innerHeight;
       }
+    },
+    created() {
+      this.editImgSrc = this.imgLoc + store.state.editImgSrc;
+      console.log(this.editImgSrc)
     },
     mounted() {
       //初始化canvas
@@ -51,11 +63,22 @@
     },
     methods: {
       initCanvas() {
-        this.fabricObj = new fabric.Canvas('canvas');
-        this.fabricObj.setWidth(this.canvasWidth);
-        this.fabricObj.setHeight(500);
+        this.fabricObj = new fabric.Canvas('canvas', {});
+        console.log(this.fabricObj);
+        let img0 = 'static/img/Game/fruits0.jpeg';
+        //加载图片
+        let imgElement = document.getElementById('my-img');
+        let imgInstance = new fabric.Image(imgElement, {
+        });
+
+        //添加背景
+        this.fabricObj.setBackgroundImage(imgInstance);
+        console.log(this.canvasWidth);
+        this.fabricObj.setWidth(imgInstance.width);
+        this.fabricObj.setHeight(imgInstance.height);
         //绑定画板事件
-        this.fabricObjAddEvent()
+        this.fabricObjAddEvent();
+
       },
       //时间监听
       fabricObjAddEvent() {
@@ -71,7 +94,6 @@
             this.drawingObject = null;
             this.moveCount = 1;
             this.doDrawing = false;
-            this.updateModifications(true);
           },
           'mouse:move': (o) => {
             if (this.moveCount % 2 && !this.doDrawing) {
@@ -89,8 +111,6 @@
           },
           'object:modified': (e) => {
             e.target.opacity = 1;
-            let object = e.target;
-            this.updateModifications(true)
           },
           'selection:created': (e) => {
             if (e.target._objects) {
@@ -104,12 +124,8 @@
               this.fabricObj.remove(e.target);
             }
             this.fabricObj.discardActiveObject(); //清楚选中框
-            this.updateModifications(true)
           },
         });
-      },
-      transformMouse(mouseX, mouseY) {
-        return {x: mouseX / this.zoom, y: mouseY / this.zoom};
       },
       resetObj() {
         this.fabricObj.selectable = false;
@@ -131,6 +147,7 @@
         }
       },
       drawing() {
+        console.log(this.drawingObject)
         if (this.drawingObject) {
           this.fabricObj.remove(this.drawingObject)
         }
@@ -169,7 +186,6 @@
           case 'remove':
             break;
           default:
-            // statements_def'
             break;
         }
         if (fabricObject) {
@@ -178,18 +194,31 @@
         }
       },
     },
-    created() {
-      this.editImgSrc = this.imgLoc + store.state.editImgSrc;
-      console.log(this.editImgSrc)
 
-    }
   }
-
 </script>
 
 
 <style>
+  .controlPanel {
+    width: 100px;
+    height: 100%;
+    margin-left: 200px;
+    position: fixed;
+  }
 
+  .canvas-wrapper {
+    position: absolute;
+    margin-left: 300px;
+  }
+  #my-img{
+    width: 0.1px;
+    height:0.1px;
+    display: none;
+  }
+  #img1{
+    position: absolute;
+    margin-left:0px;
+  }
 </style>
-
 
