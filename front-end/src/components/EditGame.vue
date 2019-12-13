@@ -4,7 +4,7 @@
       <div class="btn-group-vertical">
         <div v-for="tool in toolsArr" :key="tool"
              @click="handleTools(tool)">
-          <button type="button" class="btn btn-outline-dark">{{tool}}</button>
+          <button type="button" class="buttonCSS btn btn-outline-dark">{{tool}}</button>
         </div>
         <form @submit.prevent="onSubmit">
 
@@ -299,6 +299,11 @@
   #img1 {
     position: absolute;
     margin-left: 0px;
+  }
+
+  .buttonCSS{
+    width:100px;
+    text-align: left;
   }
 </style>
 

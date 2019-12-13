@@ -151,3 +151,16 @@ class GameWord(db.Model):
             'game_img': self.game_img,
         }
         return data
+
+class UserWord(db.Model):
+    __tablename__ = 'UserWord'
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user =db.Column(db.ForeignKey('User.username'))
+    word = db.Column(db.ForeignKey('Word.word'))
+    proficiency = db.Column(db.Integer)
+    times = db.Column(db.Integer)
+
+    def set_attr(self, data):
+        for field in ['user', 'word', 'proficiency', 'times']:
+            if field in data:
+                setattr(self, field, data[field])

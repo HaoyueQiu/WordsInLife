@@ -20,6 +20,7 @@
 </template>
 
 <script>
+  import store from '../store.js'
   export default {
     name: 'Word',
     data() {
@@ -45,12 +46,12 @@
         this.isMeaningButtonClick = true;
       },
       getData() {
-
         const path = '/words'
         this.$axios.get(path,
           {
             params: {
-              wordsubject: this.subject
+              wordsubject: this.subject,
+              username:store.state.username,
             }
           })
           .then(response => {
@@ -135,6 +136,7 @@
 <style scoped>
   * {
     text-align: center;
+    font-size: 20px;
   }
 
   #wordsMeaning {
@@ -142,8 +144,8 @@
   }
 
   #wordsImg {
-    width: 400px;
-    height: auto;
+    width: auto;
+    height: 300px;
     top: 400px;
   }
 
