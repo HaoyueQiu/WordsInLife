@@ -53,3 +53,6 @@ def get_game_words_loc():
             words_locs[i.word].append([i.x1,i.y1,i.x2,i.y2])
         pre_word = i.word
     return jsonify(words_locs)
+
+
+
