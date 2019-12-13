@@ -21,6 +21,7 @@
 
 <script>
   import store from '../store.js'
+
   export default {
     name: 'Word',
     data() {
@@ -51,7 +52,7 @@
           {
             params: {
               wordsubject: this.subject,
-              username:store.state.username,
+              username: store.state.username,
             }
           })
           .then(response => {
@@ -68,17 +69,45 @@
 
       knowWord() {
         //认识的单词就标记为已经认识不再背诵
+
         this.isKnow[this.currentPicNum] = true;
+        //单词的熟练度改变，其规则为认识的话加1/times熟练度，其中若times > 5,则加0.2
+        let p_tmp = this.words[this.currentPicNum]['proficiency'];
+        this.words[this.currentPicNum]['times']++;
+        if (this.words[this.currentPicNum]['times'] > 5) {
+          p_tmp += 0.2;
+        } else {
+          p_tmp += 1 / this.words[this.currentPicNum]['times'];
+        }
+        console.log('current word info',this.words[this.currentPicNum])
+        p_tmp = this.min_max(0, 1, p_tmp);
+        this.words[this.currentPicNum]['proficiency'] = p_tmp;
         this.refresh();
-      }
-      ,
+      },
+      // num is in [a,b]
+      min_max(a, b, num) {
+        if (num < a) {
+          num = a;
+        } else if (num > b) {
+          num = b;
+        }
+        return num;
+      },
       unknowWord() {
         //不认识的单词放到队尾继续背诵
+        //单词的熟练度改变，其规则为不认识的话则减0.2
+        let p_tmp = this.words[this.currentPicNum]['proficiency'];
+        p_tmp -= 0.2;
+        this.words[this.currentPicNum]['times']++;
+        p_tmp = this.min_max(0, 1, p_tmp);
+        this.words[this.currentPicNum]['proficiency'] = p_tmp;
         this.refresh();
       }
       ,
       uncertainWord() {
         //不确定的单词
+        //熟练度不改变
+        this.words[this.currentPicNum]['times']++;
         this.refresh();
       }
       ,
@@ -91,6 +120,8 @@
           this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
         } else {
           //背完这组单词后！
+          //？？？？？？？？？？？？？？？？存回数据库
+
           this.$router.push('/wordsSubject');
         }
       }

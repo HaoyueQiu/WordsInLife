@@ -41,3 +41,7 @@ def get_word():
     return jsonify(words)
 
 
+@bp.route('/words', methods=['POST'])
+def save_word_proficiency():
+    data = request.get_json()
+    # save data in sql
