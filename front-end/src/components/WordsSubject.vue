@@ -70,13 +70,14 @@
       width: 780px !important;
     }
   }
-
-    @media screen and (min-width:1500px){
+  /*(min-resolution: 1.25dppx)*/
+    @media screen and (min-width:1500px) {
     .vue-waterfall-easy-scroll {
       height: 600px !important;
       width: 1300px !important;
     }
   }
+
 
 </style>
 
