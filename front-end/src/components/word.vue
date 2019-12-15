@@ -42,6 +42,17 @@
 
       }
     },
+    created() {
+      console.log('words is created')
+      const path = this.$route.path;
+      this.subject = path.substr(path.lastIndexOf('/') + 1);
+      console.log(this.subject);
+      this.words = [{"EN": this.subject, "CN": ''}]
+      this.getData();
+      this.currentWord = this.words[this.currentPicNum]['EN'];
+      this.currentWordCN = this.words[this.currentPicNum]['CN'];
+      this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
+    },
     methods: {
       clickMeaningButton() {
         this.isMeaningButtonClick = true;
@@ -79,7 +90,7 @@
         } else {
           p_tmp += 1 / this.words[this.currentPicNum]['times'];
         }
-        console.log('current word info',this.words[this.currentPicNum])
+        console.log('current word info', this.words[this.currentPicNum])
         p_tmp = this.min_max(0, 1, p_tmp);
         this.words[this.currentPicNum]['proficiency'] = p_tmp;
         this.refresh();
@@ -119,13 +130,20 @@
           this.currentWordCN = this.words[this.currentPicNum]['CN'];
           this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
         } else {
-          //背完这组单词后！
-          //？？？？？？？？？？？？？？？？存回数据库
-
-          this.$router.push('/wordsSubject');
+          //背完这组单词后,将times等数据存回数据库
+          console.log('this.words',this.words);
+          const path = '/words';
+          const payload = {
+            words: this.words,
+            username:store.state.username,
+          }
+          this.$axios.post(path,payload)
+            .then(response => {
+              this.$router.push('/wordsSubject');
+            })
         }
-      }
-      ,
+      },
+
       nextWord() {
 
         let i = 0;
@@ -133,6 +151,7 @@
 
         for (; i <= wordsLength; ++i) {
           //直接这样写并不能更改currentPicNum
+          // this.currentPicNum = (this.currentPicNum++) % wordsLength;
           // this.currentPicNum = (this.currentPicNum++)%wordsLength;
           this.currentPicNum++;
           this.currentPicNum = this.currentPicNum % wordsLength;
@@ -147,18 +166,7 @@
 
       }
     }
-    ,
-    created() {
-      console.log('words is created')
-      const path = this.$route.path;
-      this.subject = path.substr(path.lastIndexOf('/') + 1);
-      console.log(this.subject);
-      this.words = [{"EN": this.subject, "CN": ''}]
-      this.getData();
-      this.currentWord = this.words[this.currentPicNum]['EN'];
-      this.currentWordCN = this.words[this.currentPicNum]['CN'];
-      this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
-    }
+
   }
 
 </script>
