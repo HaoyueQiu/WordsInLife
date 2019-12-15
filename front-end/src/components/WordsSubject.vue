@@ -3,7 +3,7 @@
     <div id="content">
       <vue-waterfall-easy :imgsArr="imgsArr" @scrollReachBottom="getData" @click="clickPic">
         <div class="img-info" slot-scope="props">
-          <p class="some-info">{{props.value.info}}</p>
+          <p class="some-info">{{props.value.info['wordsubject']}} {{props.value.info['complete_ratio']}}%</p>
         </div>
       </vue-waterfall-easy>
     </div>
@@ -12,7 +12,7 @@
 
 <script>
   import vueWaterfallEasy from 'vue-waterfall-easy'
-
+  import store from '../store.js'
   export default {
     name: 'WordsSubject',
     data() {
@@ -29,12 +29,18 @@
     methods: {
       getData() {//从后端拉取数据
         const path = '/wordSubject'
-        this.$axios.get(path)
+        this.$axios.get(path,{
+          params:{
+            username:store.state.username
+          }
+        })
           .then(response => {
-            console.log(response)
+            console.log('response',response)
             var arr = []
+            console.log(response.data)
             for (var i = 0; i < response.data.length; i++) {
-              arr.push({src: this.imgLoc + response.data[i] + '/'+`${response.data[i]}.jpg`, info: response.data[i]})
+              arr.push({src: this.imgLoc + response.data[i]['wordsubject'] + '/'+`${response.data[i]['wordsubject']}.jpg`,
+                info: {'wordsubject':response.data[i]['wordsubject'],'complete_ratio':response.data[i]['complete_ratio']}});
             }
             this.imgsArr = this.imgsArr.concat(arr)
             this.group++
@@ -43,7 +49,7 @@
       },
       clickPic(event, {index, value}) {
         console.log(index, value.info)
-        this.$router.push('WordsSubject/'+value.info)
+        this.$router.push('WordsSubject/'+value.info['wordsubject'])
       }
     },
 

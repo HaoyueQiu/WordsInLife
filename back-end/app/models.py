@@ -159,8 +159,9 @@ class UserWord(db.Model):
     word = db.Column(db.ForeignKey('Word.word'))
     proficiency = db.Column(db.Integer)
     times = db.Column(db.Integer)
+    word_subject = db.Column(db.ForeignKey('WordSubject.wordsubject'))
 
     def set_attr(self, data):
-        for field in ['user', 'word', 'proficiency', 'times']:
+        for field in ['user', 'word', 'proficiency', 'times','word_subject']:
             if field in data:
                 setattr(self, field, data[field])
