@@ -8,6 +8,7 @@
     </div>
     <p id="wordsMeaning" v-show="isMeaningButtonClick">{{currentWord}}</p>
     <p v-show="isMeaningButtonClick">{{currentWordCN}}</p>
+    <audio v-show="isMeaningButtonClick" :src="audioSrc" id="wordAudio">audio</audio>
 
     <div v-show="isMeaningButtonClick" class="btn-group" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-success" @click="knowWord">认识</button>
@@ -38,6 +39,9 @@
         imgSrc: '',
         imgLoc: "static/img/wordsSubject/",
 
+        audioSrc: '',
+        audioLoc: 'static/audio/',
+
         isOver: false,
 
       }
@@ -52,10 +56,25 @@
       this.currentWord = this.words[this.currentPicNum]['EN'];
       this.currentWordCN = this.words[this.currentPicNum]['CN'];
       this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
+      this.audioSrc = this.audioLoc + this.subject + "/" + this.currentWord + "--_gb_1.mp3";
+    },
+    beforeDestroy() {
+      //背完这组单词后,将times等数据存回数据库
+      console.log('this.words', this.words);
+      const path = '/words';
+      const payload = {
+        words: this.words,
+        username: store.state.username,
+      }
+      this.$axios.post(path, payload)
+        .then(response => {
+        })
     },
     methods: {
       clickMeaningButton() {
         this.isMeaningButtonClick = true;
+        let audio = document.querySelector('#wordAudio');
+        audio.play();
       },
       getData() {
         const path = '/words'
@@ -129,18 +148,11 @@
           this.currentWord = this.words[this.currentPicNum]['EN'];
           this.currentWordCN = this.words[this.currentPicNum]['CN'];
           this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
+          this.audioSrc = this.audioLoc + this.subject + "/" + this.currentWord + "--_gb_1.mp3";
+          console.log(this.audioSrc)
         } else {
-          //背完这组单词后,将times等数据存回数据库
-          console.log('this.words',this.words);
-          const path = '/words';
-          const payload = {
-            words: this.words,
-            username:store.state.username,
-          }
-          this.$axios.post(path,payload)
-            .then(response => {
-              this.$router.push('/wordsSubject');
-            })
+
+          this.$router.push('/wordsSubject');
         }
       },
 
@@ -191,8 +203,6 @@
   @media screen and (max-width: 1200px) {
 
   }
-
-
 
 
 </style>

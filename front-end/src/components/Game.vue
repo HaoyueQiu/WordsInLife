@@ -5,8 +5,8 @@
         <p class="some-info">{{props.value.info['word_subject']}}</p>
       </div>
     </vue-waterfall-easy>
-    <input type="file" id="choseFile" @change="onFileChange">
-    <label for="choseFile" id="editButton" class="btn btn-outline-primary">Edit Game</label>
+    <input v-if="canEditGame" type="file" id="choseFile" @change="onFileChange">
+    <label v-if="canEditGame" for="choseFile" id="editButton" class="btn btn-outline-primary">Edit Game</label>
   </div>
 </template>
 
@@ -23,6 +23,7 @@
         imgLoc: `static/img/Game/`,
         imgsArr: [],
         group: 0,
+        canEditGame:false,
       }
     },
     components: {

@@ -67,17 +67,17 @@
     },
     methods:{
       onSubmit(e) {
-        console.log('login submit')
-        this.loginForm.submitted = true  // 先更新状态
-        this.loginForm.errors = 0
+        console.log('login submit');
+        this.loginForm.submitted = true;  // 先更新状态
+        this.loginForm.errors = 0;
         if (!this.loginForm.username) {
-          this.loginForm.errors++
+          this.loginForm.errors++;
           this.loginForm.usernameError = 'Username required.'
         } else {
           this.loginForm.usernameError = null
         }
         if (!this.loginForm.password) {
-          this.loginForm.errors++
+          this.loginForm.errors++;
           this.loginForm.passwordError = 'Password required.'
         } else {
           this.loginForm.passwordError = null
@@ -88,26 +88,27 @@
         }
         //通过 axios 连接前后端，能够调用后端API，以下实现了auth，获得token
         //const path = 'http://localhost:5000/api/tokens'
-        const path = '/tokens'
+        const path = '/tokens';
         // axios 实现Basic Auth需要在config中设置 auth 这个属性即可
         this.$axios.post(path,{},{
           auth:{
             'username':this.loginForm.username,
-            'password':this.loginForm.password
+            'password':this.loginForm.password,
           }
         }).then((response)=>{
-          //handle success
-          window.localStorage.setItem('token',response.data.token)
-          window.localStorage.setItem('info:username',this.loginForm.username)
+          //handle success;
+          window.localStorage.setItem('token',response.data.token);
+          window.localStorage.setItem('info:username',this.loginForm.username);
           // store.resetNotNewAction()
-          store.loginAction()
+          store.state.username = this.loginForm.username;
+          store.loginAction();
           this.$router.push({path:'/profile'})
           //this.$router.push({path:`/profile${this.loginForm.username}`})
         })
           .catch((error)=>{
             //handle error
-            this.loginForm.passwordError = 'password Error!'
-            console.log(error.response)
+            this.loginForm.passwordError = 'password Error!';
+            console.log(error.response);
           })
 
     }
