@@ -13,7 +13,7 @@ class User(db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))  # 不保存原始密码
     name = db.Column(db.String(64))
-    about_me = db.Column(db.Text())
+    about_me = db.Column(db.Boolean())
 
     # token = db.Column(db.String(32), index=True, unique=True)
     # token_expiration = db.Column(db.DateTime)

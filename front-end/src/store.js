@@ -6,6 +6,7 @@ export default {
     username:window.localStorage.getItem('info:username'),
     // is_new: false
     editImgSrc:'',
+    authority:false,
 
   },
   loginAction(){

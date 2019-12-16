@@ -57,7 +57,8 @@
     },
 
     created() {
-      this.getData()
+      this.getData();
+      this.canEditGame = store.state.authority;
     }
   }
 
