@@ -58,6 +58,9 @@
 
     created() {
       this.getData();
+      if(store.state.username == 'root'){
+        store.state.authority = true;
+      }
       this.canEditGame = store.state.authority;
     }
   }
