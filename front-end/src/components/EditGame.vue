@@ -11,7 +11,7 @@
           <!--form-group 便捷创造bootstrap表单https://getbootstrap.com/docs/4.3/components/forms/-->
           <div class="form-group">
             <input id="word_now" v-model="currentWord" placeholder="word" class="form-control">
-            <div v-show="wordError" >{{ wordError }}</div>
+            <div >{{ wordInfo }}</div>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -57,7 +57,7 @@
         mouseFromList: [],
         mouseToList: [],
         imgInstance: null,
-        wordError: null,
+        wordInfo: '',
       }
     },
     components: {},
@@ -235,7 +235,7 @@
         }
       },
       onSubmit() {
-        this.wordError=null;
+        this.wordInfo='';
         console.log('submit word');
         console.log(this.mouseFromList, this.mouseToList);
         console.log(this.currentWord);
@@ -250,12 +250,13 @@
         this.$axios.post(path, payload)
           .then((response) => {
             console.log(response)
+            this.wordInfo = 'you submit this word successfully!';
           })
           .catch((error) => {
               // handle error
               console.log(error.response.data.message);
-              this.wordError = error.response.data.message['word'];
-              console.log(this.wordError);
+              this.wordInfo = error.response.data.message['word'];
+              console.log(this.wordInfo);
             }
           );
         this.currentWord='';

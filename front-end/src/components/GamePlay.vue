@@ -5,7 +5,8 @@
             @click="clickMeaningButton">click to get
       answer
     </button>
-
+    <audio  :src="audioSrcSuccess" id="successAudio"></audio>
+    <audio  :src="audioSrcFail" id="failAudio"></audio>
     <p><img id="gameImg" :src="imgSrc" @click="testClick"/></p>
 
   </div>
@@ -27,6 +28,11 @@
         imgLoc: "static/img/Game/",
         game_img: null,
 
+        audioSrcSuccess: 'static/audio/success.mp3',
+        audioSrcFail: 'static/audio/fail.mp3',
+
+        audioSuccess: null,
+        audioFail: null,
       }
     },
 
@@ -36,8 +42,13 @@
       this.game_img = path.substr(path.lastIndexOf('/') + 1);
       this.getData();
       this.imgSrc = this.imgLoc + "/" + this.game_img + ".jpg";
-    },
 
+    },
+    mounted(){
+      this.audioSuccess = document.querySelector('#successAudio');
+      this.audioFail = document.querySelector('#failAudio');
+      console.log('audio',this.audioSuccess);
+    },
     methods: {
       clickMeaningButton() {
         this.isAnswerButtonClick = true;
@@ -82,10 +93,13 @@
           console.log(i);
           if(picX > loc[i][0] && picX < loc[i][2] && picY > loc[i][1] && picY < loc[i][3]){
             this.currentWordNum++;
+            this.audioSuccess.play();
             this.isOver();
-            break;
+            return;
           }
         }
+        this.audioFail.play();
+
       },
     }
   }
