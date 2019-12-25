@@ -21,6 +21,9 @@ def words_subject_compare(x, y):
     # 背过一些的单词，背的越少比例的放在越下面
     elif x['complete_ratio'] < y['complete_ratio']:
         return 1
+    else:
+        return -1
+
 
 
 @bp.route('/wordSubject', methods=['GET'])
@@ -46,7 +49,7 @@ def get_words_subject():
         subject.append(
             {'wordsubject': wordsubject, 'complete_ratio': words_complete_ratio, 'is_add_to_plan': is_add_to_plan})
 
-    # subject = sorted(subject,key=cmp_to_key(words_subject_compare))
+    subject = sorted(subject,key=cmp_to_key(words_subject_compare))
     print(subject)
     return jsonify(subject)
 

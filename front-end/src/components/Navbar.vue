@@ -9,13 +9,17 @@
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class ="nav nav-tab">
-      <!--<div class="collapse navbar-collapse"> -->
+      <div class="nav nav-tab">
+        <!--<div class="collapse navbar-collapse"> -->
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
           <!-- 导航栏 -->
           <li class="nav-item">
             <router-link to="/" class="nav-link">Home <span class="sr-only">(current)</span></router-link>
           </li>
+        </ul>
+
+        <ul v-if="sharedState.is_authenticated" class="nav navbar-nav navbar-right">
           <li class="nav-item">
             <router-link to="/wordsSubject" class="nav-link">Words</router-link>
           </li>
@@ -59,11 +63,11 @@
     data() {
       return {
         sharedState: store.state,
-        username:store.state.username,
+        username: store.state.username,
       }
     },
-    methods:{
-      handlerLogout(e){
+    methods: {
+      handlerLogout(e) {
         store.logoutAction()
         //this.$toasted.show('you have been logged out.',{icon:'fingerprint'})
         this.$router.push('/login')
