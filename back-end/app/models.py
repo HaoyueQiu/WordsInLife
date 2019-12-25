@@ -165,3 +165,24 @@ class UserWord(db.Model):
         for field in ['user', 'word', 'proficiency', 'times','word_subject']:
             if field in data:
                 setattr(self, field, data[field])
+
+
+class UserFindError(db.Model):
+    __tablename__ = 'UserFindError'
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user = db.Column(db.ForeignKey('User.username'))
+    errorText = db.Column(db.String(512))
+
+
+    def set_error_text(self, data):
+        for field in ['user','errorText']:
+            if field in data:
+                setattr(self, field, data[field])
+
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'user': self.user,
+            'errorText': self.errorText,
+        }
+        return data

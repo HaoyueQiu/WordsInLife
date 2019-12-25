@@ -2,21 +2,41 @@
   <div>
     <p id="game_question">Where is the {{currentWord}}?</p>
     <button id="answer_button" type="button" class="btn btn-info" v-show="!isAnswerButtonClick"
-            @click="clickMeaningButton">click to get
-      answer
-    </button>
-    <audio  :src="audioSrcSuccess" id="successAudio"></audio>
-    <audio  :src="audioSrcFail" id="failAudio"></audio>
+            @click="clickMeaningButton">click to get answer</button>
+    <button type="button" class="btn btn-secondary" @click="errorModal = true">Error Submit</button>
+
+
+
+    <audio :src="audioSrcSuccess" id="successAudio"></audio>
+    <audio :src="audioSrcFail" id="failAudio"></audio>
+
+
+
+
+
     <p><img id="gameImg" :src="imgSrc" @click="testClick"/></p>
+
+
+    <Modal
+      v-model="errorModal"
+      title="Common Modal dialog box title"
+      @on-ok="errorSubmit"
+      @on-cancel="errorCancel">
+      <p>Username: {{username}}</p>
+      <p>please input error in the box below. </p>
+      <textarea id="TextareaError" rows="4" v-model="errorText"></textarea>
+    </Modal>
 
   </div>
 </template>
 
 <script>
+  import store from '../store'
   export default {
     name: 'GamePlay',
     data() {
       return {
+        username:'',
         isAnswerButtonClick: false,
         words_loc: {},
         words: [],
@@ -33,8 +53,13 @@
 
         audioSuccess: null,
         audioFail: null,
+
+        errorModal: false,
+
+        errorText:'',
       }
     },
+    components: {},
 
     created() {
       console.log('word game is created');
@@ -42,12 +67,13 @@
       this.game_img = path.substr(path.lastIndexOf('/') + 1);
       this.getData();
       this.imgSrc = this.imgLoc + "/" + this.game_img + ".jpg";
+      this.username = store.state.username;
 
     },
-    mounted(){
+    mounted() {
       this.audioSuccess = document.querySelector('#successAudio');
       this.audioFail = document.querySelector('#failAudio');
-      console.log('audio',this.audioSuccess);
+      console.log('audio', this.audioSuccess);
     },
     methods: {
       clickMeaningButton() {
@@ -75,10 +101,10 @@
 
       },
       isOver() {
-        console.log('this.currentWordNum',this.currentWordNum);
+        console.log('this.currentWordNum', this.currentWordNum);
         if (this.currentWordNum >= this.words.length) {
           this.$router.push('/game')
-        }else{
+        } else {
           this.currentWord = this.words[this.currentWordNum];
         }
       },
@@ -91,7 +117,7 @@
         console.log(loc);
         for (let i = 0; i < loc.length; ++i) {
           console.log(i);
-          if(picX > loc[i][0] && picX < loc[i][2] && picY > loc[i][1] && picY < loc[i][3]){
+          if (picX > loc[i][0] && picX < loc[i][2] && picY > loc[i][1] && picY < loc[i][3]) {
             this.currentWordNum++;
             this.audioSuccess.play();
             this.isOver();
@@ -99,8 +125,21 @@
           }
         }
         this.audioFail.play();
-
       },
+      errorSubmit(){
+          const path = '/findingError';
+          const payload = {
+            username:this.username,
+            errorText:this.errorText,
+          };
+        this.$axios.post(path,payload)
+          .then(response => {
+            console.log(response);
+          })
+      },
+      errorCancel(){
+        this.errorText='';
+      }
     }
   }
 
@@ -129,6 +168,9 @@
 
   }
 
+  #TextareaError{
+    width:100%;
+  }
 </style>
 
 

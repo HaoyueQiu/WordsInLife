@@ -15,6 +15,7 @@
     "fabric": "^3.5.1",
     "moment": "^2.24.0",
     "pug": "^2.0.4",
+    "view-design": "^4.0.2",
     "vue": "^2.5.2",
     "vue-core-image-upload": "^2.4.11",
     "vue-fabric": "^0.1.25",

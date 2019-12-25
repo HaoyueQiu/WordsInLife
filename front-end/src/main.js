@@ -5,6 +5,9 @@ import router from './router'
 import 'bootstrap/dist/css/bootstrap.css'
 //import VueToasted  from 'vue-toasted'
 import axios from './http'
+import ViewUI from 'view-design';
+import 'view-design/dist/styles/iview.css';
+import VueRouter from 'vue-router';
 //import moment from 'moment'
 
 //阻止显示生产模块的消息
@@ -15,6 +18,8 @@ Vue.config.productionTip = false
 // 将 $axios 挂载到 prototype 上，在组件中可以直接使用 this.$axios 访问
 Vue.prototype.$axios = axios
 
+Vue.use(ViewUI);
+Vue.use(VueRouter);
 
 
 
@@ -33,8 +38,7 @@ new Vue({
   router,//使用路由
   components: { App },//当前页面想使用的组件名称
   template: '<App/>'//使用的组件应当用这个标签去包裹
-})
-
+});
 
 
 
