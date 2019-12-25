@@ -20,6 +20,8 @@
         </ul>
 
         <ul v-if="sharedState.is_authenticated" class="nav navbar-nav navbar-right">
+
+
           <li class="nav-item">
             <router-link to="/wordsSubject" class="nav-link">Words</router-link>
           </li>
@@ -42,6 +44,18 @@
             <router-link to="/profile" class="nav-link">Profile</router-link>
           </li>
           <li class="nav-item">
+            <p class="nav-link" @click="errorModal = true">Error/Suggest</p>
+            <Modal
+              v-model="errorModal"
+              title="Error or Suggestion"
+              @on-ok="errorSubmit"
+              @on-cancel="errorCancel">
+              <p>Username: {{username}}</p>
+              <p>please input error or suggestion in the box below. </p>
+              <textarea id="TextareaError" rows="4" v-model="errorText"></textarea>
+            </Modal>
+          </li>
+          <li class="nav-item">
             <a v-on:click="handlerLogout" class="nav-link" href="#">Logout</a>
           </li>
         </ul>
@@ -50,9 +64,11 @@
             <router-link to="/login" class="nav-link">Login</router-link>
           </li>
         </ul>
+
       </div>
     </div>
   </nav>
+
 </template>
 
 <script>
@@ -64,6 +80,9 @@
       return {
         sharedState: store.state,
         username: store.state.username,
+        errorModal: false,
+
+        errorText: '',
       }
     },
     methods: {
@@ -71,7 +90,30 @@
         store.logoutAction()
         //this.$toasted.show('you have been logged out.',{icon:'fingerprint'})
         this.$router.push('/login')
+      },
+      errorSubmit() {
+        const path = '/findingError';
+        const payload = {
+          username: this.username,
+          errorText: this.errorText,
+        };
+        this.$axios.post(path, payload)
+          .then(response => {
+            this.errorText = '';
+            console.log(response);
+          })
+      },
+      errorCancel() {
+        this.errorText = '';
       }
     }
   }
 </script>
+
+
+<style scoped>
+
+  #TextareaError {
+    width: 100%;
+  }
+</style>

@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23e918dd-8eb4-4c36-8f46-2a51be209d44" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/back-end/app/api/findingError.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/src/components/ErrorBtn.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/app/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/app/api/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/app/api/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/app/api/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/ErrorBtn.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/components/GamePlay.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/GamePlay.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Navbar.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +29,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end/src/components/Navbar.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="455">
+              <caret line="53" column="49" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back-end/app/api/findingError.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -72,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/front-end/src/components/GamePlay.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="209">
+              <caret line="11" column="63" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -98,10 +100,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/src/components/ErrorBtn.vue">
+        <entry file="file://$PROJECT_DIR$/front-end/src/components/EditGame.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="49" lean-forward="true" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="49" />
+            <state relative-caret-position="475">
+              <caret line="265" column="19" selection-start-line="265" selection-start-column="19" selection-end-line="265" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -182,7 +184,6 @@
         <option value="$PROJECT_DIR$/../App/front-end/config/index.js" />
         <option value="$PROJECT_DIR$/../App/front-end/index.html" />
         <option value="$PROJECT_DIR$/../App/front-end/src/main.js" />
-        <option value="$PROJECT_DIR$/front-end/src/components/Navbar.vue" />
         <option value="$PROJECT_DIR$/back-end/app/api/words.py" />
         <option value="$PROJECT_DIR$/back-end/app/api/game.py" />
         <option value="$PROJECT_DIR$/front-end/src/components/Error.vue" />
@@ -192,6 +193,7 @@
         <option value="$PROJECT_DIR$/back-end/app/api/__init__.py" />
         <option value="$PROJECT_DIR$/back-end/app/models.py" />
         <option value="$PROJECT_DIR$/back-end/app/api/findingError.py" />
+        <option value="$PROJECT_DIR$/front-end/src/components/Navbar.vue" />
         <option value="$PROJECT_DIR$/front-end/src/components/GamePlay.vue" />
       </list>
     </option>
@@ -362,12 +364,12 @@
       <workItem from="1577010819689" duration="3756000" />
       <workItem from="1577199035592" duration="698000" />
       <workItem from="1577236964892" duration="2844000" />
-      <workItem from="1577239895698" duration="9367000" />
+      <workItem from="1577239895698" duration="9931000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23838000" />
+    <option name="totallyTimeSpent" value="24402000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -382,7 +384,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23391421" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23391421" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -396,7 +398,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5002603" side_tool="true" weight="0.04511278" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49765748" visible="true" weight="0.04249292" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49765748" visible="true" weight="0.04249292" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.4997397" weight="0.04511278" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -533,13 +535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/components/EditGame.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-434">
-          <caret line="265" column="19" selection-start-line="265" selection-start-column="19" selection-end-line="265" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/components/WordsSubject.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -584,13 +579,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/App.vue">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/components/Navbar.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/back-end/app/api/words.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -694,16 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/components/Login.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1539" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/components/Register.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1596" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/back-end/app/api/users.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -744,10 +722,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/components/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1539" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/components/Register.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1596" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/components/EditGame.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="265" column="19" selection-start-line="265" selection-start-column="19" selection-end-line="265" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/components/Navbar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="53" column="49" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/components/GamePlay.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="209">
+          <caret line="11" column="63" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
         </state>
       </provider>
     </entry>

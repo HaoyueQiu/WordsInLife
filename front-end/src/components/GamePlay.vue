@@ -9,14 +9,7 @@
 
     <audio :src="audioSrcSuccess" id="successAudio"></audio>
     <audio :src="audioSrcFail" id="failAudio"></audio>
-
-
-
-
-
     <p><img id="gameImg" :src="imgSrc" @click="testClick"/></p>
-
-
     <Modal
       v-model="errorModal"
       title="Common Modal dialog box title"
@@ -134,6 +127,7 @@
           };
         this.$axios.post(path,payload)
           .then(response => {
+            this.errorText = '';
             console.log(response);
           })
       },
