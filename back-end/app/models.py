@@ -59,7 +59,6 @@ class User(db.Model):
         self.token_expiration = now + timedelta(seconds=expires_in)
         db.session.add(self)
         return self.token
-
     def revoke_token(self):
         self.token_expiration = datetime.utcnow() - timedelta(seconds=1)
     '''
@@ -99,7 +98,6 @@ class User(db.Model):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
 
-    
     @staticmethod
     def check_token(token):
         user = User.query.filter_by(token=token).first()
@@ -132,10 +130,10 @@ class Game(db.Model):
 class GameWord(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     # 存矩形范围
-    x1 = db.Column(db.Integer,nullable=False)
-    y1 = db.Column(db.Integer,nullable=False)
-    x2 = db.Column(db.Integer,nullable=False)
-    y2 = db.Column(db.Integer,nullable=False)
+    x1 = db.Column(db.Integer, nullable=False)
+    y1 = db.Column(db.Integer, nullable=False)
+    x2 = db.Column(db.Integer, nullable=False)
+    y2 = db.Column(db.Integer, nullable=False)
     word = db.Column(db.ForeignKey('Word.word'))
     game_img = db.Column(db.ForeignKey('Game.img_name'))
 
@@ -152,17 +150,18 @@ class GameWord(db.Model):
         }
         return data
 
+
 class UserWord(db.Model):
     __tablename__ = 'UserWord'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user =db.Column(db.ForeignKey('User.username'))
+    user = db.Column(db.ForeignKey('User.username'))
     word = db.Column(db.ForeignKey('Word.word'))
     proficiency = db.Column(db.Integer)
     times = db.Column(db.Integer)
     word_subject = db.Column(db.ForeignKey('WordSubject.wordsubject'))
 
     def set_attr(self, data):
-        for field in ['user', 'word', 'proficiency', 'times','word_subject']:
+        for field in ['user', 'word', 'proficiency', 'times', 'word_subject']:
             if field in data:
                 setattr(self, field, data[field])
 
@@ -173,9 +172,8 @@ class UserFindError(db.Model):
     user = db.Column(db.ForeignKey('User.username'))
     errorText = db.Column(db.String(512))
 
-
     def set_error_text(self, data):
-        for field in ['user','errorText']:
+        for field in ['user', 'errorText']:
             if field in data:
                 setattr(self, field, data[field])
 

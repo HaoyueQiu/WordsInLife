@@ -110,7 +110,7 @@
             store.state.authority = true;
           }
           store.loginAction();
-          this.$router.push({path: '/Home'})
+          this.$router.push({path: '/'})
           //this.$router.push({path:`/profile${this.loginForm.username}`})
         })
           .catch((error) => {
