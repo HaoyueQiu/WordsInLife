@@ -6,11 +6,13 @@ from app.models import User
 '''
 启动app
 '''
-if __name__ == '__main__':
-    app = create_app()
-    from werkzeug.contrib.fixers import ProxyFix
-    app.wsgi_app = ProxyFix(app.wsgi_app)
-    app.run()
+
+app = create_app()
+# if __name__ == '__main__':
+#     app = create_app()
+#     from werkzeug.contrib.fixers import ProxyFix
+#     app.wsgi_app = ProxyFix(app.wsgi_app)
+#     app.run()
 
 # 装饰器提供shell上下文项的函数
 '''
