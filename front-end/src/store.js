@@ -12,18 +12,6 @@ export default {
   loginAction(){
     console.log('loginAction is triggered')
     this.state.is_authenticated = true
-
-    /*
-    axios.get(path,{params:{token:window.localStorage.getItem('token')}},{
-      auth: {
-        'username': this.loginForm.username,
-        'password': this.loginForm.password
-      }
-    }).then((response)=>{
-      this.state.user_id = response.data.user_id
-      console.log(this.state.user_id)
-      //router.push("/login")
-    })*/
   },
   logoutAction(){
     if(this.debug) console.log('logoutAction is triggered')
@@ -31,14 +19,4 @@ export default {
     this.state.is_authenticated = false
     this.state.username = ''
   },
-  /*
-  setNewAction () {
-    if (this.debug) { console.log('setNewAction is triggered') }
-    this.state.is_new = true
-  },
-  resetNotNewAction () {
-    if (this.debug) { console.log('resetNotNewAction is triggered') }
-    this.state.is_new = false
-  }
-  */
 }

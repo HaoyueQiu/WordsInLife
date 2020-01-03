@@ -74,7 +74,6 @@
         console.log('heightRatio', this.heightRatio)
       },
       widthRatio: function () {
-
       }
     },
     methods: {

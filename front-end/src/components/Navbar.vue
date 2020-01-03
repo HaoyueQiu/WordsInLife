@@ -20,8 +20,6 @@
         </ul>
 
         <ul v-if="sharedState.is_authenticated" class="nav navbar-nav navbar-right">
-
-
           <li class="nav-item">
             <router-link to="/wordsSubject" class="nav-link">Words</router-link>
           </li>
@@ -29,7 +27,6 @@
             <router-link to="/game" class="nav-link">Game</router-link>
           </li>
         </ul>
-
         <form class="form-inline navbar-left mr-auto">
           <input class="form-control mr-sm-2" type="search" placeholder="Search">
           <!-- 暂时先禁止提交，后续实现搜索再改回 type="submit" -->

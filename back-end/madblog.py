@@ -6,9 +6,11 @@ from app.models import User
 '''
 启动app
 '''
-
-app = create_app()
-
+if __name__ == '__main__':
+    app = create_app()
+    from werkzeug.contrib.fixers import ProxyFix
+    app.wsgi_app = ProxyFix(app.wsgi_app)
+    app.run()
 
 # 装饰器提供shell上下文项的函数
 '''
@@ -18,6 +20,8 @@ def decoratorName
   def wrapper
 @...使用 https://www.zhihu.com/question/26930016
 '''
+
+
 @app.shell_context_processor
 def make_shell_context():
     # dict(db=db, User=User)
