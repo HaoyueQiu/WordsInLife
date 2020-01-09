@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 axios.defaults.timeout = 5000
-axios.defaults.baseURL = 'http://localhost:5000/api'
-
+// axios.defaults.baseURL = 'http://localhost:5000/api'
+ axios.defaults.baseURL = 'http://47.100.57.93:5000/api'
 axios.interceptors.response.use(function (response) {
   // Do something with response data
    const token = window.localStorage.getItem('token')
