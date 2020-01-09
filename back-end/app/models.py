@@ -117,7 +117,7 @@ class Word(db.Model):
     word = db.Column(db.String(64), primary_key=True, index=True, unique=True)
     meaning = db.Column(db.String(64))
     # 外键，关联单词类别
-    word_subject = db.Column(db.String(64), db.ForeignKey('WordSubject.wordsubject'))
+    word_subject = db.Column(db.ForeignKey('WordSubject.wordsubject'))
 
 
 class Game(db.Model):

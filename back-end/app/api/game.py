@@ -23,7 +23,7 @@ def get_game_pic():
         words.append({'EN': a[i].img_name, 'word_subject': a[i].word_subject})
 
 
-    random.shuffle(words)
+    # random.shuffle(words)
 
     return jsonify(words)
 
