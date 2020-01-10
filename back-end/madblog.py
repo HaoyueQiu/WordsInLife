@@ -8,7 +8,7 @@ from app.models import User
 '''
 
 app = create_app()
-app.run()
+# app.run()
 # if __name__ == '__main__':
 #     app = create_app()
 #     from werkzeug.contrib.fixers import ProxyFix

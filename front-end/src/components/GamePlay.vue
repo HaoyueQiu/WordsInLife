@@ -10,11 +10,11 @@
     <p><img id="gameImg" :src="imgSrc" @click="testClick" @load="calculateRatio"/></p>
     <Modal
       v-model="errorModal"
-      title="Common Modal dialog box title"
+      title="错误信息提交"
       @on-ok="errorSubmit"
       @on-cancel="errorCancel">
-      <p>Username: {{username}}</p>
-      <p>please input error in the box below. </p>
+      <p>用户名: {{username}}</p>
+      <p>请将需要纠错的地方/对我们提出的改善建议填入下框 </p>
       <textarea id="TextareaError" rows="4" v-model="errorText"></textarea>
     </Modal>
 
