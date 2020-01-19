@@ -7,6 +7,7 @@ export default {
     // is_new: false
     editImgSrc:'',
     authority:false,
+    word_difficulity: 5,
 
   },
   loginAction(){

@@ -56,7 +56,7 @@
       this.currentWord = this.words[this.currentPicNum]['EN'];
       this.currentWordCN = this.words[this.currentPicNum]['CN'];
       this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
-      this.audioSrc = this.audioLoc + this.subject + "/" + this.currentWord + "--_gb_1.mp3";
+      this.audioSrc = this.audioLoc + this.subject + "/" + this.currentWord + ".mp3";
     },
     beforeDestroy() {
       //背完这组单词后,将times等数据存回数据库
@@ -83,6 +83,7 @@
             params: {
               wordsubject: this.subject,
               username: store.state.username,
+              word_diff:store.state.word_difficulity,
             }
           })
           .then(response => {

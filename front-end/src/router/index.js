@@ -10,7 +10,7 @@ import Word from '@/components/Word'
 import Game from '@/components/Game'
 import EditGame from '@/components/EditGame'
 import GamePlay from '@/components/GamePlay'
-
+import setting from '@/components/setting'
 Vue.use(Router)
 
 //暴露路由接口
@@ -72,6 +72,11 @@ const router =  new Router({
       path:'/editGame',
       name:'EditGame',
       component:EditGame,
+    },
+    {
+      path:'/setting',
+      name:'setting',
+      component:setting,
     },
   ]
 })

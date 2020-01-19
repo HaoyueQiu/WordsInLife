@@ -53,6 +53,9 @@
             </Modal>
           </li>
           <li class="nav-item">
+            <router-link to="/setting" class="nav-link">Setting</router-link>
+          </li>
+          <li class="nav-item">
             <a v-on:click="handlerLogout" class="nav-link" href="#">Logout</a>
           </li>
         </ul>
