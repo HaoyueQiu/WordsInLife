@@ -11,7 +11,7 @@
           <!--form-group 便捷创造bootstrap表单https://getbootstrap.com/docs/4.3/components/forms/-->
           <div class="form-group">
             <input id="word_now" v-model="currentWord" placeholder="word" class="form-control">
-            <div >{{ wordInfo }}</div>
+            <div>{{ wordInfo }}</div>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -26,6 +26,8 @@
     <div id="img1">
       <img :src="editImgSrc" id="my-img">
     </div>
+    <audio :src="audioSrc" id="word_audio"></audio>
+
   </div>
 </template>
 
@@ -58,6 +60,9 @@
         mouseToList: [],
         imgInstance: null,
         wordInfo: '',
+
+        audioSrc: '',
+        audioLoc: 'static/audio/',
       }
     },
     components: {},
@@ -159,7 +164,7 @@
         // fabricObj.clear 会把包括背景在内的东西都清空，因此再把背景加回去。
         this.fabricObj = new fabric.Canvas('canvas', {});
         //添加背景
-        console.log('imgInstance',this.imgInstance);
+        console.log('imgInstance', this.imgInstance);
         this.fabricObj.setBackgroundImage(this.imgInstance);
         this.fabricObj.setWidth(this.imgInstance.width);
         this.fabricObj.setHeight(this.imgInstance.height);
@@ -235,7 +240,7 @@
         }
       },
       onSubmit() {
-        this.wordInfo='';
+        this.wordInfo = '';
         console.log('submit word');
         console.log(this.mouseFromList, this.mouseToList);
         console.log(this.currentWord);
@@ -249,18 +254,24 @@
         console.log(payload);
         this.$axios.post(path, payload)
           .then((response) => {
-            console.log(response)
+            console.log(response);
             this.wordInfo = 'you submit this word successfully!';
+            this.audioSrc = this.audioLoc + this.currentWord + '.mp3';
+            let audio = new Audio();
+            audio.src = this.audioSrc;
+            audio.play();
+            this.currentWord = '';
+            this.handleTools('clear');
           })
           .catch((error) => {
               // handle error
               console.log(error.response.data.message);
               this.wordInfo = error.response.data.message['word'];
               console.log(this.wordInfo);
+              this.currentWord = '';
             }
           );
-        this.currentWord='';
-        this.handleTools('clear');
+
       },
       deepClone(obj) {
         //JS数组浅拷贝怎么办，使用JSON转化以下再转化回去，这时候得到深拷贝的内容
@@ -274,7 +285,7 @@
 </script>
 
 
-<style>
+<style scoped>
   .controlPanel {
     width: 100px;
     height: 100%;
@@ -302,8 +313,8 @@
     margin-left: 0px;
   }
 
-  .buttonCSS{
-    width:100px;
+  .buttonCSS {
+    width: 100px;
     text-align: left;
   }
 </style>

@@ -6,7 +6,6 @@ from app.models import WordSubject, Word, UserWord
 from flask import request
 from functools import cmp_to_key
 
-
 def words_subject_compare(x, y):
     # 已经完全背完了
     if x['complete_ratio'] == 100:
@@ -60,7 +59,8 @@ def get_words_subject():
 def get_word():
     username = request.args.get('username')
     wordsubject = request.args.get('wordsubject')
-    a = Word.query.filter_by(word_subject=wordsubject).all()
+    word_diff = request.args.get('word_diff')
+    a = Word.query.filter(Word.word_subject==wordsubject,Word.difficulty <= word_diff ).all()
     words = []
     for i in range(len(a)):
         queryB = UserWord.query.filter_by(user=username, word=a[i].word).all()
@@ -96,7 +96,5 @@ def save_word_proficiency():
         db.session.commit()
     # save data in sql
     return jsonify({'info': 'correct!'})
-
-
 
 

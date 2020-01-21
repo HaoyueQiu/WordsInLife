@@ -6,16 +6,35 @@
         answer
       </button>
     </div>
-    <p id="wordsMeaning" v-show="isMeaningButtonClick">{{currentWord}}</p>
+
+    <div id="wordsMeaning" v-show="isMeaningButtonClick">{{currentWord}}
+    <Icon type="md-megaphone" @click="playWordSound" />
+    </div>
     <p v-show="isMeaningButtonClick">{{currentWordCN}}</p>
-    <audio v-show="isMeaningButtonClick" :src="audioSrc" id="wordAudio">audio</audio>
+    <audio v-show="isMeaningButtonClick" :src="audioSrc" id="wordAudio"> </audio>
 
     <div v-show="isMeaningButtonClick" class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-success" @click="knowWord">认识</button>
+      <button type="button" class="btn btn-success"
+              @touchstart="touchStart"
+              @touchmove="touchMove"
+              @touchend="touchEnd"
+              @click="knowWord">认识
+      </button>
       <button type="button" class="btn btn-warning" @click="uncertainWord">不确定</button>
       <button type="button" class="btn btn-danger" @click="unknowWord">不认识</button>
     </div>
+
+     <Modal
+        v-model="killWordModal"
+        :loading="killWordModalLoading"
+        title="斩杀词确认框"
+        @on-ok="confirmKillWord">
+       <p>你想斩杀该词么？</p>
+       <p>即将该词标记为熟识，以后不再出现该词</p>
+    </Modal>
+
   </div>
+
 
 
 </template>
@@ -44,6 +63,11 @@
 
         isOver: false,
 
+        timeOutEvent:0,
+
+        killWordModal:false,
+        killWordModalLoading: true,
+
       }
     },
     created() {
@@ -56,7 +80,8 @@
       this.currentWord = this.words[this.currentPicNum]['EN'];
       this.currentWordCN = this.words[this.currentPicNum]['CN'];
       this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
-      this.audioSrc = this.audioLoc + this.subject + "/" + this.currentWord + ".mp3";
+      // this.audioSrc = this.audioLoc + this.subject + "/" + this.currentWord + ".mp3";
+      this.audioSrc = this.audioLoc + this.currentWord + ".mp3";
     },
     beforeDestroy() {
       //背完这组单词后,将times等数据存回数据库
@@ -73,6 +98,9 @@
     methods: {
       clickMeaningButton() {
         this.isMeaningButtonClick = true;
+        this.playWordSound();
+      },
+      playWordSound(){
         let audio = document.querySelector('#wordAudio');
         audio.play();
       },
@@ -149,8 +177,10 @@
           this.currentWord = this.words[this.currentPicNum]['EN'];
           this.currentWordCN = this.words[this.currentPicNum]['CN'];
           this.imgSrc = this.imgLoc + this.subject + "/" + this.currentWord + ".jpg";
-          this.audioSrc = this.audioLoc + this.subject + "/" + this.currentWord + "--_gb_1.mp3";
+          // this.audioSrc = this.audioLoc + this.subject + "/" + this.currentWord + ".mp3";
+          this.audioSrc = this.audioLoc + this.currentWord + ".mp3";
           console.log(this.audioSrc)
+
         } else {
 
           this.$router.push('/wordsSubject');
@@ -176,8 +206,37 @@
         if (i > wordsLength) {
           this.isOver = true;
         }
+      },
+      //长按事件进行词的斩杀???????????????????????为什么killWordModal会自动变成false呢？
+      touchStart(){
+        clearTimeout(this.timeOutEvent);
+        this.timeOutEvent = 0;
+        this.timeOutEvent = setTimeout(function(){
+          this.killWordModal = true;
+          console.log('touchStart');
+          console.log(this.killWordModal);
+        },1500);
+      },
+      touchEnd(){
+        console.log(this.killWordModal);
+        clearTimeout(this.timeOutEvent);
+        this.timeOutEvent = 0;
+      },
+      touchMove(){
+        clearTimeout(this.timeOutEvent);
+        this.timeOutEvent = 0;
+      },
+      //是否斩杀该词
+      confirmKillWord(){
+        console.log('confirm Kill Word');
+        this.isKnow[this.currentPicNum] = true;
+        this.words[this.currentPicNum]['proficiency'] = 1;
+        this.refresh();
+      },
+      cancelKillWord(){
+        console.log('cancel kill word');
+      },
 
-      }
     }
 
   }

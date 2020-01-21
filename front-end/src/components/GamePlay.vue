@@ -105,7 +105,11 @@
             console.log('game word list', this.words);
             this.isOver();
             this.currentWord = this.words[this.currentWordNum];
-            console.log(this.currentWord)
+            console.log(this.currentWord);
+            let audio = new Audio();
+            audio.src = 'static/audio/' + this.currentWord + '.mp3';
+            audio.play();
+
           })
 
       },
@@ -115,6 +119,9 @@
           this.$router.push('/game')
         } else {
           this.currentWord = this.words[this.currentWordNum];
+          let audio = new Audio();
+          audio.src = 'static/audio/' + this.currentWord + '.mp3';
+          audio.play();
         }
       },
       testClick(e) {
@@ -126,10 +133,10 @@
         console.log('loc', loc);
         for (let i = 0; i < loc.length; ++i) {
           console.log('widthRatio', this.widthRatio);
-          console.log(this.widthRatio*loc[i][0],this.widthRatio*loc[i][2]);
-          console.log(this.heightRatio*loc[i][1],this.heightRatio*loc[i][3]);
-          if (picX > (this.widthRatio*loc[i][0]) && picX < (this.widthRatio*loc[i][2])
-            && picY > (this.heightRatio*loc[i][1]) && picY < (this.heightRatio*loc[i][3])) {
+          console.log(this.widthRatio * loc[i][0], this.widthRatio * loc[i][2]);
+          console.log(this.heightRatio * loc[i][1], this.heightRatio * loc[i][3]);
+          if (picX > (this.widthRatio * loc[i][0]) && picX < (this.widthRatio * loc[i][2])
+            && picY > (this.heightRatio * loc[i][1]) && picY < (this.heightRatio * loc[i][3])) {
             this.currentWordNum++;
             this.audioSuccess.play();
             this.isOver();

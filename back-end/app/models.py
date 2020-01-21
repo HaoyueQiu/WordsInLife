@@ -118,6 +118,11 @@ class Word(db.Model):
     meaning = db.Column(db.String(64))
     # 外键，关联单词类别
     word_subject = db.Column(db.ForeignKey('WordSubject.wordsubject'))
+    difficulty = db.Column(db.Integer,index=True)
+    def set_attr(self, data):
+        for field in ['word', 'meaning', 'word_subject', 'difficulty']:
+            if field in data:
+                setattr(self, field, data[field])
 
 
 class Game(db.Model):

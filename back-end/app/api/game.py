@@ -22,8 +22,5 @@ def get_game_pic():
     for i in range(len(a)):
         words.append({'EN': a[i].img_name, 'word_subject': a[i].word_subject})
 
-
-    random.shuffle(words)
-
     return jsonify(words)
 
